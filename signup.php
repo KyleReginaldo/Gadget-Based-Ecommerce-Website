@@ -27,7 +27,7 @@
       }
     ?>
   	<div class="register-box-body">
-    	<p class="login-box-msg">Register a new membership</p>
+    	<p class="login-box-msg">Register</p>
 
     	<form action="register.php" method="POST">
           <div class="form-group has-feedback">
@@ -58,7 +58,7 @@
       		</div>
     	</form>
       <br>
-      <a href="login.php">I already have a membership</a><br>
+      <a href="login.php">I already have an account</a><br>
       <a href="index.php"><i class="fa fa-home"></i> Home</a>
   	</div>
 </div>

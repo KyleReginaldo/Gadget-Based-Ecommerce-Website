@@ -4,9 +4,15 @@
     header('location: cart_view.php');
   }
 ?>
-<?php include 'includes/header.php'; ?>
+<?php include 'includes/header.php';?>
 <body class="hold-transition login-page">
-<div class="login-box">
+  <style>
+    .login-box{
+      background-color: red;
+      background-image: url(images/bg-login.jpg);
+    }
+  </style>
+<div class="login-box" >
   	<?php
       if(isset($_SESSION['error'])){
         echo "
@@ -26,7 +32,7 @@
       }
     ?>
   	<div class="login-box-body">
-    	<p class="login-box-msg">Sign in to start your session</p>
+    	<p class="login-box-msg">Sign in</p>
 
     	<form action="verify.php" method="POST">
       		<div class="form-group has-feedback">
@@ -44,7 +50,7 @@
       		</div>
     	</form>
       <br>
-      <a href="signup.php" class="register-text text-center">Register a new membership</a><br>
+      <a href="signup.php" class="register-text text-center">Register a new account</a><br>
       <a href="index.php"><i class="fa fa-home"></i> Home</a>
   	</div>
 </div>

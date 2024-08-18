@@ -13,10 +13,10 @@
         <ul class="nav navbar-nav">
           <li><a href="index.php">Home</a></li>
           <!--<li><a href="Contact Us"></a></li>-->
-          <li><a href="about.php">About US</a></li> 
+          <li><a href="about.php">About Us</a></li> 
           <li><a href="contact.php">Contact Us</a></li>       
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">CATEGORY <span class="caret"></span></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Category <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
               <?php
                 $conn = $pdo->open();

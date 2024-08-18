@@ -43,13 +43,13 @@
 	        				</div>
 	        				<div class="col-sm-12">
 	        					<div class="row">
-	        						<div class="col-sm-3">
+	        						<!-- <div class="col-sm-3">
 	        							<h4>Name:</h4>
 	        							<h4>Email:</h4>
 	        							<h4>Contact Info:</h4>
 	        							<h4>Address:</h4>
 	        							<h4>Member Since:</h4>
-	        						</div>
+	        						</div> -->
 	        						<div class="col-sm-12">
 	        							<h4><?php echo $user['firstname'].' '.$user['lastname']; ?>
 	        								<span class="pull-right">
@@ -57,8 +57,8 @@
 	        								</span>
 	        							</h4>
 	        							<h4><?php echo $user['email']; ?></h4>
-	        							<h4><?php echo (!empty($user['contact_info'])) ? $user['contact_info'] : 'N/a'; ?></h4>
-	        							<h4><?php echo (!empty($user['address'])) ? $user['address'] : 'N/a'; ?></h4>
+	        							<h4><?php echo (!empty($user['contact_info'])) ? $user['contact_info'] : 'N/A'; ?></h4>
+	        							<h4><?php echo (!empty($user['address'])) ? $user['address'] : 'N/A'; ?></h4>
 	        							<h4><?php echo date('M d, Y', strtotime($user['created_on'])); ?></h4>
 	        						</div>
 	        					</div>

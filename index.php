@@ -49,11 +49,11 @@
     </div>
 </div>
 
-					
+<p style="text-align: start; margin-bottom: 8px; color: #000000; font-family: Arial, sans-serif; font-size: 18px; font-weight: 500;">Featured Products</p>
+
 		       		<?php
 		       			$month = date('m');
 		       			$conn = $pdo->open();
-
 		       			try{
 		       			 	$inc = 3;	
 						    $stmt = $conn->prepare("SELECT *, SUM(quantity) AS total_qty FROM details LEFT JOIN sales ON sales.id=details.sales_id LEFT JOIN products ON products.id=details.product_id WHERE MONTH(sales_date) = '$month' GROUP BY details.product_id ORDER BY total_qty DESC LIMIT 6");
