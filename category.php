@@ -29,7 +29,7 @@
 	      <!-- Main content -->
 	      <section class="content">
 	        <div class="row">
-	        	<div class="col-sm-9">
+	        	<div class="col-sm-12">
 		            <h1 class="page-header"><?php echo $cat['name']; ?></h1>
 		       		<?php
 		       			
@@ -69,9 +69,9 @@
 
 		       		?> 
 	        	</div>
-	        	<div class="col-sm-3">
+	        	<!-- <div class="col-sm-3">
 	        		<?php include 'includes/sidebar.php'; ?>
-	        	</div>
+	        	</div> -->
 	        </div>
 	      </section>
 	     

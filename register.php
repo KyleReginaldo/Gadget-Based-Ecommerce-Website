@@ -110,7 +110,7 @@
 
 				    } 
 				    catch (Exception $e) {
-				        $_SESSION['success'] = 'Done Now Admin Will Activate Your Account  ';
+				        $_SESSION['success'] = 'Account successfully created  ';
 				        header('location: signup.php');
 				    }
 

@@ -16,7 +16,7 @@
 	      <!-- Main content -->
 	      <section class="content">
 	        <div class="row">
-	        	<div class="col-sm-9">
+	        	<div class="col-sm-12">
 	        		<?php
 	        			if(isset($_SESSION['error'])){
 	        				echo "
@@ -41,7 +41,7 @@
 	        				<div class="col-sm-3">
 	        					<img src="<?php echo (!empty($user['photo'])) ? 'images/'.$user['photo'] : 'images/profile.jpg'; ?>" width="100%">
 	        				</div>
-	        				<div class="col-sm-9">
+	        				<div class="col-sm-12">
 	        					<div class="row">
 	        						<div class="col-sm-3">
 	        							<h4>Name:</h4>
@@ -50,7 +50,7 @@
 	        							<h4>Address:</h4>
 	        							<h4>Member Since:</h4>
 	        						</div>
-	        						<div class="col-sm-9">
+	        						<div class="col-sm-12">
 	        							<h4><?php echo $user['firstname'].' '.$user['lastname']; ?>
 	        								<span class="pull-right">
 	        									<a href="#edit" class="btn btn-success btn-flat btn-sm" data-toggle="modal"><i class="fa fa-edit"></i> Edit</a>
@@ -116,9 +116,9 @@
 	        			</div>
 	        		</div>
 	        	</div>
-	        	<div class="col-sm-3">
+	        	<!-- <div class="col-sm-3">
 	        		<?php include 'includes/sidebar.php'; ?>
-	        	</div>
+	        	</div> -->
 	        </div>
 	      </section>
 	     

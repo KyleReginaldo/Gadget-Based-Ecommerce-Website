@@ -11,7 +11,7 @@
 	      <!-- Main content -->
 	      <section class="content">
 	        <div class="row">
-	        	<div class="col-sm-9">
+	        	<div class="col-sm-12">
 	            <?php
 	       			
 	       			$conn = $pdo->open();
@@ -62,9 +62,9 @@
 
 	       		?> 
 	        	</div>
-	        	<div class="col-sm-3">
+	        	<!-- <div class="col-sm-3">
 	        		<?php include 'includes/sidebar.php'; ?>
-	        	</div>
+	        	</div> -->
 	        </div>
 	      </section>
 	     

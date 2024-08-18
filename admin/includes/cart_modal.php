@@ -13,7 +13,7 @@
                 <div class="form-group">
                     <label for="product" class="col-sm-3 control-label">Product</label>
 
-                    <div class="col-sm-9">
+                    <div class="col-sm-12">
                       <select class="form-control select2" style="width: 100%;" name="product" id="product" required>
                         <option value="" selected>- Select -</option>
                       </select>
@@ -22,7 +22,7 @@
                 <div class="form-group">
                     <label for="quantity" class="col-sm-3 control-label">Quantity</label>
 
-                    <div class="col-sm-9">
+                    <div class="col-sm-12">
                       <input type="number" class="form-control" id="quantity" name="quantity" value="1" required>
                     </div>
                 </div>
@@ -52,7 +52,7 @@
                 <div class="form-group">
                     <label for="edit_quantity" class="col-sm-3 control-label">Quantity</label>
 
-                    <div class="col-sm-9">
+                    <div class="col-sm-12">
                       <input type="text" class="form-control" id="edit_quantity" name="quantity">
                     </div>
                 </div>
