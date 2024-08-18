@@ -44,11 +44,17 @@
       		</div>
     	</form>
       <br>
-      <a href="signup.php" class="text-center">Register a new membership</a><br>
+      <a href="signup.php" class="register-text text-center">Register a new membership</a><br>
       <a href="index.php"><i class="fa fa-home"></i> Home</a>
   	</div>
 </div>
 	
 <?php include 'includes/scripts.php' ?>
+<style>
+  .register-text:hover{
+    color:black;
+    font-weight: 600;
+  }
+</style>
 </body>
 </html>

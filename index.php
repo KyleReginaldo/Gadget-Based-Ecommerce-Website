@@ -21,13 +21,8 @@
 	        				unset($_SESSION['error']);
 	        			}
 	        		?>
-<div class="box" style="padding: 20px; background-color: #007bff; border-radius: 10px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);">
-    <h2 style="text-align: center; margin-bottom: 20px; color: #f8f9fa; font-family: Arial, sans-serif; font-size: 32px; font-weight: bold;">The Top Sellers</h2>
-    
-</div>
-
-
-<div class="box box-solid" style="border: 1px solid #007bff; border-radius: 5px; padding: 10px; background-color: #f8f9fa;">
+<h2 style="text-align: start; margin-bottom: 8px; color: #000000; font-family: Arial, sans-serif; font-size: 24px; font-weight: 500;">The Top Sellers</h2>
+<div class="box box-solid" style="border: 1px solid #F5EDEDs; border-radius: 5px; padding: 10px; background-color: #000000;">
     <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
             <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
@@ -36,13 +31,13 @@
         </ol>
         <div class="carousel-inner">
             <div class="item active">
-                <img src="images/banner1.png" alt="First slide">
+                <img src="images/banner1.png" alt="First slide" class="img-fluid">
             </div>
             <div class="item">
-                <img src="images/banner2.png" alt="Second slide">
+                <img src="images/banner2.png" alt="Second slide" class="img-fluid">
             </div>
             <div class="item">
-                <img src="images/banner3.png" alt="Third slide">
+                <img src="images/banner3.png" alt="Third slide" class="img-fluid">
             </div>
         </div>
         <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev" >
