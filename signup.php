@@ -5,6 +5,11 @@
   }
 ?>
 <?php include 'includes/header.php'; ?>
+<style>
+.button-auth{
+  background-color: blue;
+}
+</style>
 <body class="hold-transition register-page">
 <div class="register-box">
   	<?php
@@ -50,12 +55,7 @@
             <input type="password" class="form-control" name="repassword" placeholder="Retype password" required>
             <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
           </div>
-          <hr>
-      		<div class="row">
-    			<div class="col-xs-4">
-          			<button type="submit" class="btn btn-primary btn-block btn-flat" name="signup"><i class="fa fa-pencil"></i> Sign Up</button>
-        		</div>
-      		</div>
+      		<button type="submit" class="button-auth btn btn-primary btn-block btn-flat" name="signup"><i class="fa fa-pencil"></i> Sign Up</button>
     	</form>
       <br>
       <a href="login.php">I already have an account</a><br>

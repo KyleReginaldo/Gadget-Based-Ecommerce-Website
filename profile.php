@@ -38,12 +38,12 @@
 	        		?>
 	        		<div class="box box-solid">
 	        			<div class="box-body">
-	        				<div class="col-sm-3">
+	        				<div class="col-sm-1">
 	        					<img src="<?php echo (!empty($user['photo'])) ? 'images/'.$user['photo'] : 'images/profile.jpg'; ?>" width="100%">
 	        				</div>
 	        				<div class="col-sm-12">
 	        					<div class="row">
-	        						<!-- <div class="col-sm-3">
+	        						<!-- <div class="col-sm-1">
 	        							<h4>Name:</h4>
 	        							<h4>Email:</h4>
 	        							<h4>Contact Info:</h4>
@@ -98,7 +98,7 @@
 	        										<td class='hidden'></td>
 	        										<td>".date('M d, Y', strtotime($row['sales_date']))."</td>
 	        										<td>".$row['pay_id']."</td>
-	        										<td>&#36; ".number_format($total, 2)."</td>
+	        										<td>&#8369; ".number_format($total, 2)."</td>
 	        										<td><button class='btn btn-sm btn-flat btn-info transact' data-id='".$row['id']."'><i class='fa fa-search'></i> View</button></td>
 	        									</tr>
 	        								";
@@ -116,7 +116,7 @@
 	        			</div>
 	        		</div>
 	        	</div>
-	        	<!-- <div class="col-sm-3">
+	        	<!-- <div class="col-sm-1">
 	        		<?php include 'includes/sidebar.php'; ?>
 	        	</div> -->
 	        </div>

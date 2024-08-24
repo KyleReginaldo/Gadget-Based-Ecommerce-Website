@@ -10,7 +10,7 @@
             <div class="modal-body">
               <form class="form-horizontal" method="POST" action="category_add.php">
                 <div class="form-group">
-                    <label for="name" class="col-sm-3 control-label">Name</label>
+                    <label for="name" class="col-sm-1 control-label">Name</label>
 
                     <div class="col-sm-12">
                       <input type="text" class="form-control" id="name" name="name" required>
@@ -39,7 +39,7 @@
               <form class="form-horizontal" method="POST" action="category_edit.php">
                 <input type="hidden" class="catid" name="id">
                 <div class="form-group">
-                    <label for="edit_name" class="col-sm-3 control-label">Name</label>
+                    <label for="edit_name" class="col-sm-1 control-label">Name</label>
 
                     <div class="col-sm-12">
                       <input type="text" class="form-control" id="edit_name" name="name">

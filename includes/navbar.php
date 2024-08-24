@@ -1,8 +1,8 @@
-<header class="main-header">
+<header class="main-header" >
   <nav class="navbar navbar-static-top">
     <div class="container">
       <div class="navbar-header">
-        <a href="index.php" class="navbar-brand"><b>Jambol</b></a>
+        <a href="index.php" class="navbar-brand"><img src="images/logo1.png" alt="" width="64px"></a>
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
           <i class="fa fa-bars"></i>
         </button>
@@ -11,10 +11,10 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
         <ul class="nav navbar-nav">
-          <li><a href="index.php">Home</a></li>
+          <li><a href="index.php#">Home</a></li>
           <!--<li><a href="Contact Us"></a></li>-->
-          <li><a href="about.php">About Us</a></li> 
-          <li><a href="contact.php">Contact Us</a></li>       
+          <li><a href="index.php#about">About Us</a></li> 
+          <li><a href="index.php#contactus">Contact Us</a></li>       
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Category <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
@@ -25,7 +25,7 @@
                   $stmt->execute();
                   foreach($stmt as $row){
                     echo "
-                      <li><a href='category.php?category=".$row['cat_slug']."'>".$row['name']."</a></li>
+                      <li><a href='category.php?category=".$row['id']."'>".$row['name']."</a></li>
                     ";                  
                   }
                 }

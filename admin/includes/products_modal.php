@@ -30,7 +30,6 @@
               <form class="form-horizontal" method="POST" action="products_add.php" enctype="multipart/form-data">
                 <div class="form-group">
                   <label for="name" class="col-sm-1 control-label">Name</label>
-
                   <div class="col-sm-5">
                     <input type="text" class="form-control" id="name" name="name" required>
                   </div>
@@ -44,7 +43,13 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="price" class="col-sm-1 control-label">Price</label>
+                <label for="name" class="col-sm-1 control-label">Stock</label>
+                  <div class="col-sm-5">
+                    <input type="text" class="form-control" id="stock" name="stock" required>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="number" class="col-sm-1 control-label">Price</label>
 
                   <div class="col-sm-5">
                     <input type="text" class="form-control" id="price" name="price" required>
@@ -86,7 +91,7 @@
               <form class="form-horizontal" method="POST" action="products_photo.php" enctype="multipart/form-data">
                 <input type="hidden" class="prodid" name="id">
                 <div class="form-group">
-                    <label for="photo" class="col-sm-3 control-label">Photo</label>
+                    <label for="photo" class="col-sm-1 control-label">Photo</label>
 
                     <div class="col-sm-12">
                       <input type="file" id="photo" name="photo" required>

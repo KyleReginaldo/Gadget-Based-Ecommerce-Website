@@ -7,7 +7,6 @@
 	 
 	  <div class="content-wrapper">
 	    <div class="container">
-
 	      <!-- Main content -->
 	      <section class="content">
 	        <div class="row">
@@ -32,17 +31,20 @@
 	        		<?php
 	        			if(isset($_SESSION['user'])){
 	        				echo "
-	        					<div id='paypal-button'></div>
+								<div style='display: flex; justify-content: end;'>
+									<button	onclick='buyNow()' style='background-color: #F9E400; color: white; border: none; padding: 8px 32px; border-radius: 4px;'>Checkout</button>
+								</div>
 	        				";
 	        			}
 	        			else{
 	        				echo "
-	        					<h4>You need to <a href='login.php'>Login</a> to checkout.</h4>
+	        					<h4>You need to <a href='login.php'><b>Login</b></a> to checkout.</h4>
 	        				";
 	        			}
+						
 	        		?>
 	        	</div>
-	        	<!-- <div class="col-sm-3">
+	        	<!-- <div class="col-sm-1">
 	        		<?php include 'includes/sidebar.php'; ?>
 	        	</div> -->
 	        </div>
@@ -143,6 +145,9 @@ function getDetails(){
 	});
 }
 
+function buyNow(){
+	alert('This function is on progress');
+}
 function getTotal(){
 	$.ajax({
 		type: 'POST',
@@ -158,28 +163,23 @@ function getTotal(){
 <script>
 paypal.Button.render({
     env: 'production', // change for production if app is live,
-
 	client: {
         //sandbox:    'ASb1ZbVxG5ZFzCWLdYLi_d1-k5rmSjvBZhxP2etCxBKXaJHxPba13JJD_D3dTNriRbAv3Kp_72cgDvaZ',
         production: 'AaBHKJFEej4V6yaArjzSx9cuf-UYesQYKqynQVCdBlKuZKawDDzFyuQdidPOBSGEhWaNQnnvfzuFB9SM'
     },
-
     commit: true, // Show a 'Pay Now' button
-
     style: {
     	color: 'gold',
     	size: 'small'
     },
-
     payment: function(data, actions) {
         return actions.payment.create({
             payment: {
                 transactions: [
                     {
-                    	//total purchase
                         amount: { 
                         	total: total, 
-                        	currency: 'USD' 
+                        	currency: 'PHP' 
                         }
                     }
                 ]

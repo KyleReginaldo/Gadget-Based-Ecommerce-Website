@@ -1,0 +1,23 @@
+version: '3'
+services:
+  php:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./src:/var/www/html
+    ports:
+      - 8080:80
+    depends_on:
+      - mysql
+  mysql:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: Kyle0950
+      MYSQL_DATABASE: ecomm
+      MYSQL_USER: root
+      MYSQL_PASSWORD: Kyle0950
+    volumes:
+      - mysql_data:/var/lib/mysql
+volumes:
+  mysql_data:

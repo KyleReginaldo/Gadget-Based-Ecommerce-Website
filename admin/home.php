@@ -71,7 +71,7 @@
                   $total += $subtotal;
                 }
 
-                echo "<h3>&#36; ".number_format_short($total, 2)."</h3>";
+                echo "<h3>&#8369; ".number_format_short($total, 2)."</h3>";
               ?>
               <p>Total Sales</p>
             </div>
@@ -136,7 +136,7 @@
                   $total += $subtotal;
                 }
 
-                echo "<h3>&#36; ".number_format_short($total, 2)."</h3>";
+                echo "<h3>&#8369; ".number_format_short($total, 2)."</h3>";
                 
               ?>
 

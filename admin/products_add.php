@@ -8,6 +8,7 @@
 		$category = $_POST['category'];
 		$price = $_POST['price'];
 		$description = $_POST['description'];
+		$stock = $_POST['stock'];
 		$filename = $_FILES['photo']['name'];
 
 		$conn = $pdo->open();
@@ -30,8 +31,8 @@
 			}
 
 			try{
-				$stmt = $conn->prepare("INSERT INTO products (category_id, name, description, slug, price, photo) VALUES (:category, :name, :description, :slug, :price, :photo)");
-				$stmt->execute(['category'=>$category, 'name'=>$name, 'description'=>$description, 'slug'=>$slug, 'price'=>$price, 'photo'=>$new_filename]);
+				$stmt = $conn->prepare("INSERT INTO products (category_id, name, description, slug, price, photo, stock) VALUES (:category, :name, :description, :slug, :price, :photo, :stock)");
+				$stmt->execute(['category'=>$category, 'name'=>$name, 'description'=>$description, 'slug'=>$slug, 'price'=>$price, 'photo'=>$new_filename, 'stock'=>$stock]);
 				$_SESSION['success'] = 'User added successfully';
 
 			}

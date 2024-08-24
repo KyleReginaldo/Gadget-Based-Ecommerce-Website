@@ -11,8 +11,7 @@
               <form class="form-horizontal" method="POST" action="cart_add.php">
                 <input type="hidden" class="userid" name="id">
                 <div class="form-group">
-                    <label for="product" class="col-sm-3 control-label">Product</label>
-
+                    <label for="product" class="col-sm-1 control-label">Product</label>
                     <div class="col-sm-12">
                       <select class="form-control select2" style="width: 100%;" name="product" id="product" required>
                         <option value="" selected>- Select -</option>
@@ -20,7 +19,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="quantity" class="col-sm-3 control-label">Quantity</label>
+                    <label for="quantity" class="col-sm-1 control-label">Quantity</label>
 
                     <div class="col-sm-12">
                       <input type="number" class="form-control" id="quantity" name="quantity" value="1" required>
@@ -50,7 +49,7 @@
                 <input type="hidden" class="cartid" name="cartid">
                 <input type="hidden" class="userid" name="userid">
                 <div class="form-group">
-                    <label for="edit_quantity" class="col-sm-3 control-label">Quantity</label>
+                    <label for="edit_quantity" class="col-sm-1 control-label">Quantity</label>
 
                     <div class="col-sm-12">
                       <input type="text" class="form-control" id="edit_quantity" name="quantity">

@@ -10,35 +10,35 @@
           	<div class="modal-body">
             	<form class="form-horizontal" method="POST" action="profile_update.php?return=<?php echo basename($_SERVER['PHP_SELF']); ?>" enctype="multipart/form-data">
           		  <div class="form-group">
-                  	<label for="email" class="col-sm-3 control-label">Email</label>
+                  	<label for="email" class="col-sm-1 control-label">Email</label>
 
                   	<div class="col-sm-12">
                     	<input type="text" class="form-control" id="email" name="email" value="<?php echo $admin['email']; ?>">
                   	</div>
                 </div>
                 <div class="form-group">
-                    <label for="password" class="col-sm-3 control-label">Password</label>
+                    <label for="password" class="col-sm-1 control-label">Password</label>
 
                     <div class="col-sm-12"> 
                       <input type="password" class="form-control" id="password" name="password" value="<?php echo $admin['password']; ?>">
                     </div>
                 </div>
                 <div class="form-group">
-                  	<label for="firstname" class="col-sm-3 control-label">Firstname</label>
+                  	<label for="firstname" class="col-sm-1 control-label">Firstname</label>
 
                   	<div class="col-sm-12">
                     	<input type="text" class="form-control" id="firstname" name="firstname" value="<?php echo $admin['firstname']; ?>">
                   	</div>
                 </div>
                 <div class="form-group">
-                  	<label for="lastname" class="col-sm-3 control-label">Lastname</label>
+                  	<label for="lastname" class="col-sm-1 control-label">Lastname</label>
 
                   	<div class="col-sm-12">
                     	<input type="text" class="form-control" id="lastname" name="lastname" value="<?php echo $admin['lastname']; ?>">
                   	</div>
                 </div>
                 <div class="form-group">
-                    <label for="photo" class="col-sm-3 control-label">Photo:</label>
+                    <label for="photo" class="col-sm-1 control-label">Photo:</label>
 
                     <div class="col-sm-12">
                       <input type="file" id="photo" name="photo">
@@ -46,7 +46,7 @@
                 </div>
                 <hr>
                 <div class="form-group">
-                    <label for="curr_password" class="col-sm-3 control-label">Current Password:</label>
+                    <label for="curr_password" class="col-sm-1 control-label">Current Password:</label>
 
                     <div class="col-sm-12">
                       <input type="password" class="form-control" id="curr_password" name="curr_password" placeholder="input current password to save changes" required>

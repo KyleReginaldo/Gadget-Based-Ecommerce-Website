@@ -1,7 +1,6 @@
 <?php
 	include 'includes/session.php';
 	$conn = $pdo->open();
-
 	$output = '';
 
 	if(isset($_SESSION['user'])){
@@ -32,10 +31,10 @@
 				$total += $subtotal;
 				$output .= "
 					<tr>
-						<td><button type='button' data-id='".$row['cartid']."' class='btn btn-danger btn-flat cart_delete'><i class='fa fa-remove'></i></button></td>
+						<td><center><button type='button' data-id='".$row['cartid']."' class='btn btn-danger btn-flat cart_delete'><i class='fa fa-remove'></i></button></center></td>
 						<td><img src='".$image."' width='30px' height='30px'></td>
 						<td>".$row['name']."</td>
-						<td>&#36; ".number_format($row['price'], 2)."</td>
+						<td>&#8369; ".number_format($row['price'], 2)."</td>
 						<td class='input-group'>
 							<span class='input-group-btn'>
             					<button type='button' id='minus' class='btn btn-default btn-flat minus' data-id='".$row['cartid']."'><i class='fa fa-minus'></i></button>
@@ -46,14 +45,14 @@
 				                </button>
 				            </span>
 						</td>
-						<td>&#36; ".number_format($subtotal, 2)."</td>
+						<td>&#8369; ".number_format($subtotal, 2)."</td>
 					</tr>
 				";
 			}
 			$output .= "
 				<tr>
 					<td colspan='5' align='right'><b>Total</b></td>
-					<td><b>&#36; ".number_format($total, 2)."</b></td>
+					<td><b>&#8369; ".number_format($total, 2)."</b></td>
 				<tr>
 			";
 
@@ -75,10 +74,10 @@
 				$total += $subtotal;
 				$output .= "
 					<tr>
-						<td><button type='button' data-id='".$row['productid']."' class='btn btn-danger btn-flat cart_delete'><i class='fa fa-remove'></i></button></td>
+						<td><button type='button' data-id='".$row['productid']."' class='btn btn-danger btn-flat cart_delete'>remove</button></td>
 						<td><img src='".$image."' width='30px' height='30px'></td>
 						<td>".$product['name']."</td>
-						<td>&#36; ".number_format($product['price'], 2)."</td>
+						<td>&#8369; ".number_format($product['price'], 2)."</td>
 						<td class='input-group'>
 							<span class='input-group-btn'>
             					<button type='button' id='minus' class='btn btn-default btn-flat minus' data-id='".$row['productid']."'><i class='fa fa-minus'></i></button>
@@ -89,7 +88,7 @@
 				                </button>
 				            </span>
 						</td>
-						<td>&#36; ".number_format($subtotal, 2)."</td>
+						<td>&#8369; ".number_format($subtotal, 2)."</td>
 					</tr>
 				";
 				
@@ -98,7 +97,7 @@
 			$output .= "
 				<tr>
 					<td colspan='5' align='right'><b>Total</b></td>
-					<td><b>&#36; ".number_format($total, 2)."</b></td>
+					<td><b>&#8369; ".number_format($total, 2)."</b></td>
 				<tr>
 			";
 		}

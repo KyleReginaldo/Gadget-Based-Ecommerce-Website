@@ -48,7 +48,7 @@
                     
 
                 </div>
-                <!-- <div class="col-sm-3">
+                <!-- <div class="col-sm-1">
                     <?php include 'includes/sidebar.php'; ?>
                 </div> -->
             </div>
