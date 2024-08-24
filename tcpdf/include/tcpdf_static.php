@@ -1017,7 +1017,7 @@ class TCPDF_STATIC {
 	 * @public static
 	 */
 	public static function formatPageNumber($num) {
-		return number_format((float)$num, 0, '', '.');
+		return ((float)$num, 0, '', '.');
 	}
 
 	/**

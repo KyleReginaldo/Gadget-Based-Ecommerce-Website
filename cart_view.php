@@ -32,7 +32,7 @@
 	        			if(isset($_SESSION['user'])){
 	        				echo "
 								<div style='display: flex; justify-content: end;'>
-									<button	onclick='buyNow()' style='background-color: #F9E400; color: white; border: none; padding: 8px 32px; border-radius: 4px;'>Checkout</button>
+									<button style='background-color: #F9E400; color: white; border: none; padding: 8px 32px; border-radius: 4px;'><a href='checkout_view.php'>Checkout</a></button>
 								</div>
 	        				";
 	        			}
