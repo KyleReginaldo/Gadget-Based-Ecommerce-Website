@@ -45,7 +45,7 @@
                 <div class="form-group">
                 <label for="name" class="col-sm-1 control-label">Stock</label>
                   <div class="col-sm-5">
-                    <input type="text" class="form-control" id="stock" name="stock" required>
+                    <input type="text" class="form-control" id="stock" name="stock" required value="1">
                   </div>
                 </div>
                 <div class="form-group">

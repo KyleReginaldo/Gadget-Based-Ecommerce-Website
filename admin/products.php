@@ -107,7 +107,7 @@
                           <tr>
                             <td>".$row['name']."</td>
                             <td>
-                              <img src='".$image."' height='30px' width='30px'>
+                              <a href='".$image."'><img src='".$image."' height='30px' width='30px'></a>
                               <span class='pull-right'><a href='#edit_photo' class='photo' data-toggle='modal' data-id='".$row['id']."'><i class='fa fa-edit'></i></a></span>
                             </td>
                             <td><a href='#description' data-toggle='modal' class='btn btn-info btn-sm btn-flat desc' data-id='".$row['id']."'><i class='fa fa-search'></i> View</a></td>
