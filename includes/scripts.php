@@ -40,6 +40,7 @@ $(function(){
   });
 
   getCart();
+  getOrders();
 
   $('#productForm').submit(function(e){
   	e.preventDefault();
@@ -62,6 +63,28 @@ $(function(){
   		}
   	});
   });
+  $('#checkoutForm').submit(function(e){
+  	e.preventDefault();
+  	var product = $(this).serialize();
+  	$.ajax({
+  		type: 'POST',
+  		url: 'add_order.php',
+  		// data: {"q"},
+  		dataType: 'json',
+  		success: function(response){
+  			$('#callout').show();
+  			$('.message').html(response.message);
+  			if(response.error){
+  				$('#callout').removeClass('callout-success').addClass('callout-danger');
+  			}
+  			else{
+				$('#callout').removeClass('callout-danger').addClass('callout-success');
+				getOrders();
+  			}
+  		}
+  	});
+  });
+  
 
   $(document).on('click', '.close', function(){
   	$('#callout').hide();
@@ -77,6 +100,17 @@ function getCart(){
 		success: function(response){
 			$('#cart_menu').html(response.list);
 			$('.cart_count').html(response.count);
+		}
+	});
+}
+function getOrders(){
+	$.ajax({
+		type: 'POST',
+		url: 'order_fetch.php',
+		dataType: 'json',
+		success: function(response){
+			$('#order_menu').html(response.list);
+			$('.order_count').html(response.count);
 		}
 	});
 }

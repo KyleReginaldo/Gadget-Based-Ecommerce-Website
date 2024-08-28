@@ -22,6 +22,7 @@
 		        				<th>Price</th>
 		        				<th width="20%">Quantity</th>
 		        				<th>Subtotal</th>
+								<th>Selected</th>
 		        			</thead>
 		        			<tbody id="tbody">
 		        			</tbody>
@@ -37,9 +38,7 @@
 	        				";
 	        			}
 	        			else{
-	        				echo "
-	        					<h4>You need to <a href='login.php'><b>Login</b></a> to checkout.</h4>
-	        				";
+	        				echo "<h4>You need to <a href='login.php'><b>Login</b></a> to checkout.</h4>";
 	        			}
 						
 	        		?>
@@ -58,6 +57,7 @@
 
 <?php include 'includes/scripts.php'; ?>
 <script>
+	
 var total = 0;
 $(function(){
 	$(document).on('click', '.cart_delete', function(e){

@@ -130,7 +130,7 @@
 		            	</div>
 		            </div>
 		            <br>
-				    <div class="fb-comments" data-href="http://localhost/ecommerce/product.php?product=<?php echo $slug; ?>" data-numposts="10" width="100%"></div> 
+				    <!-- <div class="fb-comments" data-href="http://localhost/ecommerce/product.php?product=<?php echo $slug; ?>" data-numposts="10" width="100%"></div>  -->
 	        	</div>
 	        	<!-- <div class="col-sm-1">
 	        		<?php include 'includes/sidebar.php'; ?>

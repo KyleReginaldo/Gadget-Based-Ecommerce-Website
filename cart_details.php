@@ -23,15 +23,21 @@
 
 		try{
 			$total = 0;
-			$stmt = $conn->prepare("SELECT *, cart.id AS cartid FROM cart LEFT JOIN products ON products.id=cart.product_id WHERE user_id=:user");
+			$stmt = $conn->prepare("SELECT *,cart.selected AS selected, cart.id AS cartid FROM cart LEFT JOIN products ON products.id=cart.product_id WHERE user_id=:user");
 			$stmt->execute(['user'=>$user['id']]);
 			foreach($stmt as $row){
 				$image = (!empty($row['photo'])) ? 'images/'.$row['photo'] : 'images/noimage.jpg';
 				$subtotal = $row['price']*$row['quantity'];
+				// if($row['selected']){
+				// 	$total += $subtotal;
+				// }
 				$total += $subtotal;
+
+				
+				$selected = $row['selected'];
 				$output .= "
 					<tr>
-						<td><center><button type='button' data-id='".$row['cartid']."' class='btn btn-danger btn-flat cart_delete'><i class='fa fa-remove'></i></button></center></td>
+						<td><center><button type='button' data-id='".$row['cartid']."' class='btn btn-danger btn-round cart_delete'><i class='fa fa-remove'></i></button></center></td>
 						<td><img src='".$image."' width='30px' height='30px'></td>
 						<td>".$row['name']."</td>
 						<td>&#8369; ".number_format($row['price'], 2)."</td>
@@ -46,6 +52,7 @@
 				            </span>
 						</td>
 						<td>&#8369; ".number_format($subtotal, 2)."</td>
+						<td><form id='formStatus'><input type='checkbox' class='status-checkbox' name='selected' data-id='".$row['id']."' id='selected' ".$row['selected']." ? checked : ''></form></td>
 					</tr>
 				";
 			}
@@ -114,6 +121,6 @@
 
 	$pdo->close();
 	echo json_encode($output);
-
+	
 ?>
 

@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <title>Check out</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="ph-address-selector.js"></script>
     <style>
         body{
             background-color: #DFDFDE;
@@ -110,9 +112,9 @@
 			 margin-bottom: 16px;
 			 font-size: 24px;
 		}
-		.pm-label{
+		label{
 			margin-bottom: 0;
-			margin-top: 16px;
+			margin-top: 8px;
 		}
 		.payment-method{
 			 display: flex;
@@ -128,7 +130,8 @@
     </style>
 </head>
 <body>
-    <div class="container-md">
+    <form id="checkoutForm" action="" method="post">
+	<div class="container-md">
         <div class="row d-flex flex-row-reverse">
 			<div class="right-container col-md-6">
 			<div class="review">
@@ -139,8 +142,8 @@
 		       			 	$inc = 3;	
                             $stmt = $conn->prepare("SELECT * FROM cart INNERT JOIN products ON product_id = products.id WHERE user_id = :userid");
                             $stmt->execute(['userid' => $_SESSION['user']]);
-				            // $total += $subtotal;
 						    foreach ($stmt as $row) {
+								$_SESSION['productId'] = $row['id'];
 						    	$image = (!empty($row['photo'])) ? 'images/'.$row['photo'] : 'images/noimage.jpg';
 						    	$inc = ($inc == 3) ? 1 : $inc + 1;
 								$subtotal = $row['price']*$row['quantity'];
@@ -162,11 +165,10 @@
 						catch(PDOException $e){
 							echo "There is some problem in connection: " . $e->getMessage();
 						}
-
+						
+						$_SESSION['total'] = $total;
 						$pdo->close();
-
 		       		?>
-					
 					<div>
 						<div class="between">
 							<p>Total</p>
@@ -174,26 +176,30 @@
 						</div>
 						<p><input type="checkbox" name="agree" id="agree"> I have read and agree to the Terms and Condition</p>
 						<button type="submit" class="place-order">Place Order</button>
+						<div class="callout" id="callout" style="display:none;">
+	        				<button type="button" class="close"><span aria-hidden="true">&times;</span></button>
+	        				<span class="message" style="color: green;"></span>
+	        			</div>
 					</div>
 			</div>
 			</div>
 			<div class="left-container col-md-6">
 				<h5>Checkout</h5>
 				<h6>Shipping Information</h6>
-				<form action="">
-					<label for="fullName">Full name<span> *</span></label>
-					<input name="fullName" type="text" placeholder="Enter full name">
-					<label for="emailAddress">Email address<span> *</span></label>
-					<input name="emailAddress" type="text" placeholder="Enter emaill address">
-					<label for="phoneNumber">Phone number<span> *</span></label>
-					<input name="phoneNumber" type="text" placeholder="Enter phone number">
-					<label for="Region">Region</label>
-					<input name="Region" type="text" placeholder="------">
-					<label for="State">City</label>
-					<input name="State" type="text" placeholder="------">
-					<label for="Baranggay">Baranggay</label>
-					<input name="Baranggay" type="text" placeholder="------">
-				</form>
+					<label class="form-label">Region *</label>
+					<select name="region" class="form-control form-control-md" id="region"></select>
+					<input type="hidden" class="form-control form-control-md" name="region_text" id="region-text" required>
+					<label class="form-label">Province *</label>
+					<select name="province" class="form-control form-control-md" id="province"></select>
+            		<input type="hidden" class="form-control form-control-md" name="province_text" id="province-text" required>
+					<label class="form-label">City / Municipality *</label>
+					<select name="city" class="form-control form-control-md" id="city"></select>
+            		<input type="hidden" class="form-control form-control-md" name="city_text" id="city-text" required>
+					<label class="form-label">Barangay *</label>
+					<select name="barangay" class="form-control form-control-md" id="barangay"></select>
+					<input type="hidden" class="form-control form-control-md" name="barangay_text" id="barangay-text" required>
+					<label for="street-text" class="form-label">Street (Optional)</label>
+					<input type="text" class="form-control form-control-md" name="street_text" id="street-text">
 				<p class="pm-label">Payment Method</p>
 				<div class="payment-method">
 					<p><input type="checkbox" name="COD" id="agree"> Cash On Delivery</p>
@@ -202,7 +208,10 @@
 				</div>
 			</div>
         </div>
-    </div>
+    </div>	
+	</form>
+	<?php include 'includes/scripts.php'; ?>
+
 </body>
 </html>
 
