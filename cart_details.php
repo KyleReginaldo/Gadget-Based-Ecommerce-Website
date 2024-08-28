@@ -52,7 +52,7 @@
 				            </span>
 						</td>
 						<td>&#8369; ".number_format($subtotal, 2)."</td>
-						<td><form id='formStatus'><input type='checkbox' class='status-checkbox' name='selected' data-id='".$row['id']."' id='selected' ".$row['selected']." ? checked : ''></form></td>
+						<td><form id='formStatus'><input type='checkbox' class='status-checkbox' name='selected' data-id='".$row['id']."' id='selected' checked disabled></form></td>
 					</tr>
 				";
 			}
