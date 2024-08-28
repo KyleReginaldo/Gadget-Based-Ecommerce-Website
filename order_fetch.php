@@ -16,10 +16,11 @@
                             <img src='".$image."' class='fluid' alt='User Image'>
                         </div>
                         <h4>
-                            <b>".$row['catname']."</b>
+                            <b style='color: orange;'>".$row['status']."</b>
+                            <p>".$productname."</p>
                             <small>&times; ".$row['quantity']."</small>
                         </h4>
-                        <p>".$productname."</p>
+                        
                     </a>
                 </li>
             ";

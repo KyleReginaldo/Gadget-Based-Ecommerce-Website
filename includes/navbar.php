@@ -13,7 +13,12 @@
         <ul class="nav navbar-nav">
           <li><a href="index.php#">Home</a></li>
           <!--<li><a href="Contact Us"></a></li>-->
-          <li><a href="index.php#about">About Us</a></li> 
+          <?php
+          if(isset($_SESSION['user'])){
+            echo "<li><a href='orders.php'>Orders</a></li>";
+          }
+          ?>
+         <li><a href="index.php#about">About Us</a></li> 
           <li><a href="index.php#contactus">Contact Us</a></li>       
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Category <span class="caret"></span></a>
