@@ -1,4 +1,4 @@
-<header class="main-header" >
+<header class="main-header" style="position:fixed; width:100%;">
   <nav class="navbar navbar-static-top">
     <div class="container">
       <div class="navbar-header">
@@ -15,7 +15,7 @@
           <!--<li><a href="Contact Us"></a></li>-->
           <?php
           if(isset($_SESSION['user'])){
-            echo "<li><a href='orders.php'>Orders</a></li>";
+            echo "<li><a href='orders.php?status=Pending'>Orders</a></li>";
           }
           ?>
          <li><a href="index.php#about">About Us</a></li> 
@@ -114,7 +114,7 @@
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
           <li class="dropdown messages-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <a href="orders.php?status=Pending" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-shopping-bag"></i>
               <span class="label label-success order_count"></span>
             </a>

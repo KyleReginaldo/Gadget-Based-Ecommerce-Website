@@ -11,12 +11,13 @@
             $productname = (strlen($row['prodname']) > 30) ? substr_replace($row['prodname'], '...', 27) : $row['prodname'];
             $output['list'] .= "
                 <li>
-                    <a href='product.php?product=".$row['slug']."'>
+                    <a href='orders.php?status=Pending'>
                         <div class='pull-left'>
                             <img src='".$image."' class='fluid' alt='User Image'>
                         </div>
                         <h4>
-                            <b style='color: orange;'>".$row['status']."</b>
+                            <b style='color: black;'>&#8369;".number_format($row['total'], 2)."</b>
+                            <p style='color: orange;'>".$row['status']."</p>
                             <p>".$productname."</p>
                             <small>&times; ".$row['quantity']."</small>
                         </h4>

@@ -157,11 +157,17 @@
 	.contact-content-right{
 		flex: 7;
 	}
+	.banner{
+		object-fit: cover;
+		width: 100%;
+		height: 60%;
+	}
 </style>
 <div class="wrapper">
 
 	<?php include 'includes/navbar.php'; ?>
 	<div class="content-wrapper">
+	<img class="banner" src="images/jambol-banner.png" alt="">
 		<div class="container">
 			<section class="content">
 				<div class="row" id="#">
@@ -180,7 +186,7 @@
 								<a class="shop-now" href="category.php?category=1">Shop Now</a>
 								<div class="merge-content row">
 									<div class="col-sm-6">
-										<h4 style="colomr: green; font-weight: 600;">100%</h4>
+										<h4 style="color: green; font-weight: 600;">100%</h4>
 										<p>Authentic</p>
 									</div>
 									<div class="col-sm-6">
@@ -210,37 +216,10 @@
 							</div>
 						</div>
 					</div>
-	<!-- <h2 style="text-align: start; margin-bottom: 8px; color: #000000; font-family: Arial, sans-serif; font-size: 24px; font-weight: 500;">The Top Sellers</h2>
-	<div class="box box-solid" style="border: 1px solid #F5EDEDs; border-radius: 5px; padding: 10px; background-color: #000000;">
-		<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-			<ol class="carousel-indicators">
-				<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-				<li data-target="#carousel-example-generic" data-slide-to="1" class=""></li>
-				<li data-target="#carousel-example-generic" data-slide-to="2" class=""></li>
-			</ol>
-			<div class="carousel-inner">
-				<div class="item active">
-					<img src="images/banner1.png" alt="First slide" class="img-fluid">
-				</div>
-				<div class="item">
-					<img src="images/banner2.png" alt="Second slide" class="img-fluid">
-				</div>
-				<div class="item">
-					<img src="images/banner3.png" alt="Third slide" class="img-fluid">
-				</div>
-			</div>
-			<a class="left carousel-control" href="#carousel-example-generic" data-slide="prev" >
-				<span class="fa fa-angle-left" style="color: #fff;"></span>
-			</a>
-			<a class="right carousel-control" href="#carousel-example-generic" data-slide="next" >
-				<span class="fa fa-angle-right" style="color: #fff;"></span>
-			</a>
-		</div>
-	</div> -->
-	<div class="row title-row" style="margin-bottom: 8px; margin-left: 0; padding: 0;">
-		<div class="col-sm-6"><p style="text-align: start; margin: 0; padding: 0; color: #2E2D30; font-family: Arial, sans-serif; font-size: 18px; font-weight: 500;">Our Top Collection</p></div>
-		<div class="col-sm-6" style="text-align: end;"><a href="category.php?category=1">view more</a></div>
-	</div>
+					<div class="row title-row" style="margin-bottom: 8px; margin-left: 0; padding: 0;">
+						<div class="col-sm-6"><p style="text-align: start; margin: 0; padding: 0; color: #2E2D30; font-family: Arial, sans-serif; font-size: 18px; font-weight: 500;">Our Top Collection</p></div>
+						<div class="col-sm-6" style="text-align: end;"><a href="category.php?category=1">view more</a></div>
+					</div>
 						<?php
 							$month = date('m');
 							$conn = $pdo->open();

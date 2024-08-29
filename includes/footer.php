@@ -43,8 +43,6 @@
         <div style="flex: 1; margin: 10px;">
             <h3 style="color: #f2f2f2;">Customer Support</h3>
             <ul style="list-style: none; padding: 0;">
-                <li><a href="#" style="color: #f2f2f2; text-decoration: none;">Shipping & Delivery</a></li>
-                <li><a href="#" style="color: #f2f2f2; text-decoration: none;">Returns & Refunds</a></li>
                 <li><a href="#" style="color: #f2f2f2; text-decoration: none;">Track Your Order</a></li>
                 <li><a href="#" style="color: #f2f2f2; text-decoration: none;">Terms & Conditions</a></li>
                 <li><a href="#" style="color: #f2f2f2; text-decoration: none;">Privacy Policy</a></li>

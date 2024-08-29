@@ -9,14 +9,19 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="ph-address-selector.js"></script>
     <style>
+		*{
+			margin: 0;
+            padding: 0;
+		}
+		p{
+			margin: 0;
+		}
         body{
             background-color: #DFDFDE;
-            margin: 0;
-            padding: 0;
         }
         .item-display{
             display: flex;
-            align-items: center;
+            align-items: start;
             align-content:center;
             justify-content: start;
             margin: 12px 0;
@@ -134,19 +139,20 @@
 	<div class="container-md">
         <div class="row d-flex flex-row-reverse">
 			<div class="right-container col-md-6">
+			<p>Items</p>
 			<div class="review">
 				<?php	
 						$total = 0;
 		       			$conn = $pdo->open();
 		       			try{
 		       			 	$inc = 3;	
-                            $stmt = $conn->prepare("SELECT * FROM cart INNERT JOIN products ON product_id = products.id WHERE user_id = :userid");
+                            $stmt = $conn->prepare("SELECT * FROM cart INNERT JOIN products ON product_id = products.id WHERE user_id = :userid AND selected=true");
                             $stmt->execute(['userid' => $_SESSION['user']]);
 						    foreach ($stmt as $row) {
 								$_SESSION['productId'] = $row['id'];
 						    	$image = (!empty($row['photo'])) ? 'images/'.$row['photo'] : 'images/noimage.jpg';
 						    	$inc = ($inc == 3) ? 1 : $inc + 1;
-								$subtotal = $row['price']*$row['quantity'];
+								$subtotal = $row['price'] * $row['quantity'];
 								$total += $subtotal;
 	       						if($inc == 1) echo "<div class=''>";
 	       						echo "<div class='item-display'>

@@ -77,7 +77,6 @@
                 <tbody>
                   <?php
                     $conn = $pdo->open();
-
                     try{
                       $stmt = $conn->prepare("SELECT *, cart.id AS cartid FROM cart LEFT JOIN products ON products.id=cart.product_id WHERE user_id=:user_id");
                       $stmt->execute(['user_id'=>$user['id']]);

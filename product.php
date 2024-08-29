@@ -4,7 +4,6 @@
 	$slug = $_GET['product'];
 	$category = '';
 	try{
-		 		
 	    $stmt = $conn->prepare("SELECT *, products.name AS prodname, category.name AS catname, products.id AS prodid FROM products LEFT JOIN category ON category.id=products.category_id WHERE slug = :slug");
 	    $stmt->execute(['slug' => $slug]);
 	    $product = $stmt->fetch();
@@ -64,8 +63,8 @@
 			padding: 24px;
 			border-radius: 8px;
 		}
-		.zoom{
-			
+		.form-group{
+			width: 60%;
 		}
 	</style>
 <script>
@@ -81,7 +80,7 @@
 
 	<?php include 'includes/navbar.php'; ?>
 	 
-	  <div class="content-wrapper">
+	  <div class="content-wrapper" style="margin-top: 4rem;">
 	    <div class="container">
 
 	      <!-- Main content -->
@@ -100,14 +99,13 @@
 		            		<h1 class="page-header"><?php echo $product['prodname']; ?></h1>
 		            		<h3><b>&#8369; <?php echo number_format($product['price'], 2); ?></b></h3>
 		            		<p><b>Category:</b> <a href="category.php?category=<?php echo $product['category_id']; ?>"><?php echo $product['catname']; ?></a></p>
-		            		<p><?php echo $product['description']; ?></p>
 							<form class="" id="productForm" method="post">
 		            			<div class="form-group">
 			            			<div class="input-group col-sm-5">
 			            				<span class="input-group-btn">
 			            					<button type="button" id="minus" class="btn btn-default btn-flat btn-md"><i class="fa fa-minus"></i></button>
 			            				</span>
-							          	<input type="text" name="quantity" id="quantity" class="form-control input-md text-center" value="1">
+							          	<input type="text" name="quantity" id="quantity" class="quantity form-control input-md text-center" value="1">
 							            <span class="input-group-btn">
 							                <button type="button" id="add" class="btn btn-default btn-flat btn-md"><i class="fa fa-plus"></i>
 							                </button>
@@ -117,18 +115,12 @@
 			            		</div>
 								<div class="buttons">
 									<button type="submit" class="add-cart btn btn-primary btn-md">Add to Cart</button>
-									<button type="button" class="checkout btn btn-md" id="checkout">Checkout</button>
+									<a href="cart_view.php" class="checkout btn btn-md" id="checkout">Checkout</a>
 								</div>
-
 		            		</form>
-							<!-- <?php
-									echo $_POST['quantity'];
-									 if(isset($_POST['quantity']) && $product['stock'] > Number($_POST['quantity'])){
-										echo '<div>Test error</div>';
-									 }
-									?> -->
 		            	</div>
 		            </div>
+					<p><?php echo $product['description']; ?></p>
 		            <br>
 				    <!-- <div class="fb-comments" data-href="http://localhost/ecommerce/product.php?product=<?php echo $slug; ?>" data-numposts="10" width="100%"></div>  -->
 	        	</div>
@@ -192,12 +184,7 @@
 
 <?php include 'includes/scripts.php'; ?>
 <script>
-$(function(){
-	$('#checkout').click(function(e){
-		e.preventDefault();
-		alert('This function is in progress');
-	})
-})
+
 
 $(function(){
 	$('#add').click(function(e){

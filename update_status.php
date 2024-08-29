@@ -1,15 +1,33 @@
 <?php
+	include 'includes/session.php';
 
+	$conn = $pdo->open();
 
-$id = isset($_POST['id']) ? (int)$_POST['id'] : 0;
-$status = isset($_POST['status']) ? (int)$_POST['status'] : 0;
+	$output = array('error'=>false);
 
-// Validate input
-if ($id > 0) {
-    // Update the database
-    $stmt = $conn->prepare("UPDATE cart SET selected=:selected WHERE id=:id");
-    $stmt->execute(['selected'=>$status, 'id'=>$id]);
-} else {
-    echo 'invalid';
-}
+	$id = $_POST['id'];
+	$selected = $_POST['selected'];
+
+	if(isset($_SESSION['user'])){
+		try{
+			$stmt = $conn->prepare("UPDATE cart SET selected=:selected WHERE id=:id");
+			$stmt->execute(['selected'=>$selected, 'id'=>$id]);
+			$output['message'] = 'Updated';
+		}
+		catch(PDOException $e){
+			$output['message'] = $e->getMessage();
+		}
+	}
+	else{
+		foreach($_SESSION['cart'] as $key => $row){
+			if($row['productid'] == $id){
+				$_SESSION['cart'][$key]['quantity'] = $qty;
+				$output['message'] = 'Updated';
+			}
+		}
+	}
+
+	$pdo->close();
+	echo json_encode($output);
+
 ?>
