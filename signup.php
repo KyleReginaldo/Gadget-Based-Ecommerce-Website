@@ -31,7 +31,7 @@
         
         .login-body{
             display:flex;
-            justify-content: end;
+            justify-content: center;
             align-items: center;
             height: 100vh;
             width: 100vw;
@@ -71,6 +71,11 @@
             border: none;
             color: white;
         }
+        .forgot-password{
+            font-size: 0.8rem;
+            color: black;
+            cursor: pointer;
+        }
     </style>
 </head>
 
@@ -99,7 +104,7 @@
               }
             ?>
             <img src="images/logo.png" alt="">
-            <p>Welcome Back!</p>
+            <p>Sign up for faster checkout.</p>
             <small>Enter your details</small>
             <form action="register.php" method="POST">
                 <label for="email">First name</label>
@@ -127,6 +132,7 @@
                   <input type="password" class="form-control" name="repassword" placeholder="Retype password" required>
                   <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
                 </div>
+                <a href=""><small class="forgot-password">Forgotten your password?</small></a>
                 <button type="submit" class="button-auth btn btn-primary btn-block btn-flat" name="signup"><i class="fa fa-pencil"></i> Sign Up</button>
             </form>
             <medium class="text-center">Already have account? <a href="login.php">Sign In</a></medium>

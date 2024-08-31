@@ -25,13 +25,17 @@
             margin: 0.5rem 0;
             width: 400px;
         }
+        input:focus{
+            outline: none;
+            border: 1px solid blue;
+        }
         button{
             width: 100%;
         }
         
         .login-body{
             display:flex;
-            justify-content: end;
+            justify-content: center;
             align-items: center;
             height: 100vh;
             width: 100vw;
@@ -71,6 +75,17 @@
             border: none;
             color: white;
         }
+        small{
+            font-weight: 600;
+            font-size: 1rem;
+            margin: 0;
+            padding: 0;
+        }
+        .forgot-password{
+            font-size: 0.8rem;
+            color: black;
+            cursor: pointer;
+        }
     </style>
 </head>
 
@@ -79,8 +94,8 @@
     <div class="login-body">
         <div class="right-side">
             <img src="images/logo.png" alt="">
-            <p>Welcome Back!</p>
-            <small>Enter your details</small>
+            <p>Sign in for faster checkout.</p>
+            <small>Sign in to Jambol</small>
             <form action="verify.php" method="POST">
                 <label for="email">Email</label>
                 <div class="form-group has-feedback">
@@ -92,10 +107,10 @@
                     <input type="password" class="form-control" name="password" placeholder="Enter your password" required>
                     <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                 </div>
+                <a href=""><small class="forgot-password">Forgotten your password?</small></a>
                 <button type="submit" class="button-auth btn btn-primary btn-block btn-flat" name="login"><i class="fa fa-sign-in"></i> Sign In</button>
             </form>
             <medium class="text-center">Don't have an account? <a href="signup.php">Sign Up</a></medium>
-
         </div>
    </div>
    </div>

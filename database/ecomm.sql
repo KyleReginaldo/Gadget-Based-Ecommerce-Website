@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 31, 2024 at 08:44 AM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Generation Time: Aug 31, 2024 at 10:33 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -110,20 +110,35 @@ CREATE TABLE `orders` (
   `street` varchar(255) DEFAULT NULL,
   `baranggay` varchar(255) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `order_number` varchar(50) NOT NULL
+  `order_number` varchar(50) NOT NULL,
+  `sales_date` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`id`, `user_id`, `product_id`, `quantity`, `total`, `status`, `region`, `province`, `city`, `street`, `baranggay`, `created_at`, `order_number`) VALUES
-(12, 16, 61, 6, 151538, 'Cancelled', 'Region IV-A (CALABARZON)', 'Cavite', 'General Trias', 'dadadsda', 'Navarro', '2024-08-30 16:16:13', '6083'),
-(13, 16, 62, 2, 141798, 'Shipping', 'Region IV-A (CALABARZON)', 'Cavite', 'General Trias', 'dadadsda', 'Navarro', '2024-08-30 16:16:13', '6145'),
-(14, 16, 63, 4, 339996, 'Cancelled', 'Region IV-A (CALABARZON)', 'Cavite', 'General Trias', 'dadadsda', 'Navarro', '2024-08-30 16:16:13', '6208'),
-(15, 16, 64, 1, 27499, 'Cancelled', 'Region IV-A (CALABARZON)', 'Cavite', 'General Trias', 'dadadsda', 'Navarro', '2024-08-30 16:16:13', '6272'),
-(16, 16, 65, 3, 79197, 'Cancelled', 'Region IV-A (CALABARZON)', 'Cavite', 'General Trias', '', '', '2024-08-31 03:13:26', '81719'),
-(17, 16, 52, 3, 98970, 'Pending', 'Region IV-A (CALABARZON)', 'Cavite', 'General Trias', 'daadaa', 'Panungyanan', '2024-08-31 03:37:50', '40152');
+INSERT INTO `orders` (`id`, `user_id`, `product_id`, `quantity`, `total`, `status`, `region`, `province`, `city`, `street`, `baranggay`, `created_at`, `order_number`, `sales_date`) VALUES
+(12, 16, 61, 6, 151538, 'Completed', 'Region IV-A (CALABARZON)', 'Cavite', 'General Trias', 'dadadsda', 'Navarro', '2024-05-27 16:16:13', '6083', NULL),
+(13, 16, 62, 2, 141798, 'Shipping', 'Region IV-A (CALABARZON)', 'Cavite', 'General Trias', 'dadadsda', 'Navarro', '2024-08-30 16:16:13', '6145', NULL),
+(14, 16, 63, 4, 339996, 'Completed', 'Region IV-A (CALABARZON)', 'Cavite', 'General Trias', 'dadadsda', 'Navarro', '2024-08-30 16:16:13', '6208', NULL),
+(15, 16, 64, 1, 27499, 'Cancelled', 'Region IV-A (CALABARZON)', 'Cavite', 'General Trias', 'dadadsda', 'Navarro', '2024-07-29 16:16:13', '6272', NULL),
+(16, 16, 65, 3, 79197, 'Pending', 'Region IV-A (CALABARZON)', 'Cavite', 'General Trias', '', '', '2024-08-31 03:13:26', '81719', NULL),
+(17, 16, 52, 3, 98970, 'Completed', 'Region IV-A (CALABARZON)', 'Cavite', 'General Trias', 'daadaa', 'Panungyanan', '2024-06-23 03:37:50', '40152', '2024-08-31');
+
+--
+-- Triggers `orders`
+--
+DELIMITER $$
+CREATE TRIGGER `update_sales_date` BEFORE UPDATE ON `orders` FOR EACH ROW BEGIN
+    -- Check if the status has been updated to 'Completed'
+    IF OLD.status <> 'Completed' AND NEW.status = 'Completed' THEN
+        -- Update the sales_date to the current date
+        SET NEW.sales_date = CURDATE();
+    END IF;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 

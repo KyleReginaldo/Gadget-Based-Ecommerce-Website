@@ -62,12 +62,12 @@
           <div class="small-box bg-aqua">
             <div class="inner">
               <?php
-                $stmt = $conn->prepare("SELECT * FROM details LEFT JOIN products ON products.id=details.product_id");
-                $stmt->execute();
+                $stmt = $conn->prepare("SELECT * FROM orders WHERE status=:status");
+                $stmt->execute(['status'=>'Completed']);
 
                 $total = 0;
                 foreach($stmt as $srow){
-                  $subtotal = $srow['price']*$srow['quantity'];
+                  $subtotal = $srow['total'];
                   $total += $subtotal;
                 }
 
@@ -127,19 +127,14 @@
           <div class="small-box bg-red">
             <div class="inner">
               <?php
-                $stmt = $conn->prepare("SELECT * FROM details LEFT JOIN sales ON sales.id=details.sales_id LEFT JOIN products ON products.id=details.product_id WHERE sales_date=:sales_date");
-                $stmt->execute(['sales_date'=>$today]);
-
+                $stmt = $conn->prepare("SELECT * FROM orders WHERE sales_date=:day");
+                $stmt->execute(['day'=>$today]);
                 $total = 0;
                 foreach($stmt as $trow){
-                  $subtotal = $trow['price']*$trow['quantity'];
-                  $total += $subtotal;
+                  $total += $trow['total'];
                 }
-
                 echo "<h3>&#8369; ".number_format_short($total, 2)."</h3>";
-                
               ?>
-
               <p>Sales Today</p>
             </div>
             <div class="icon">
@@ -198,12 +193,11 @@
   $sales = array();
   for( $m = 1; $m <= 12; $m++ ) {
     try{
-      $stmt = $conn->prepare("SELECT * FROM details LEFT JOIN sales ON sales.id=details.sales_id LEFT JOIN products ON products.id=details.product_id WHERE MONTH(sales_date)=:month AND YEAR(sales_date)=:year");
-      $stmt->execute(['month'=>$m, 'year'=>$year]);
+      $stmt = $conn->prepare("SELECT * FROM orders WHERE MONTH(created_at)=:month AND YEAR(created_at)=:year AND status=:status");
+      $stmt->execute(['month'=>$m, 'year'=>$year,'status'=>'Completed']);
       $total = 0;
       foreach($stmt as $srow){
-        $subtotal = $srow['price']*$srow['quantity'];
-        $total += $subtotal;    
+        $total += $srow['total'];    
       }
       array_push($sales, round($total, 2));
     }
@@ -233,7 +227,7 @@ $(function(){
     datasets: [
       {
         label               : 'SALES',
-        fillColor           : 'rgba(60,141,188,0.9)',
+        fillColor           : 'blue',
         strokeColor         : 'rgba(60,141,188,0.8)',
         pointColor          : '#3b8bba',
         pointStrokeColor    : 'rgba(60,141,188,1)',
