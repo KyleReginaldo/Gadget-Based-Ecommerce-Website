@@ -7,21 +7,19 @@
 
 	$output = array('list'=>'');
 
-	$stmt = $conn->prepare("SELECT * FROM details LEFT JOIN products ON products.id=details.product_id LEFT JOIN sales ON sales.id=details.sales_id WHERE details.sales_id=:id");
+	$stmt = $conn->prepare("SELECT  *, users.firstname AS firstname, users.lastname AS lastname, products.name AS prodName, category.name AS catName, orders.id AS id, products.price as price FROM orders INNER JOIN users ON orders.user_id=users.id INNER JOIN products ON orders.product_id=products.id INNER JOIN category ON products.category_id=category.id WHERE orders.id=:id");
 	$stmt->execute(['id'=>$id]);
-
 	$total = 0;
 	foreach($stmt as $row){
-		$output['transaction'] = $row['pay_id'];
-		$output['date'] = date('M d, Y', strtotime($row['sales_date']));
-		$subtotal = $row['price']*$row['quantity'];
-		$total += $subtotal;
+		$total = $row['total'];
+		$output['transaction'] = $row['order_number'];
+		$output['date'] = date('M d, Y', strtotime($row['created_at']));
 		$output['list'] .= "
 			<tr class='prepend_items'>
 				<td>".$row['name']."</td>
 				<td>&#8369; ".number_format($row['price'], 2)."</td>
 				<td>".$row['quantity']."</td>
-				<td>&#8369; ".number_format($subtotal, 2)."</td>
+				<td>&#8369; ".number_format($row['total'], 2)."</td>
 			</tr>
 		";
 	}

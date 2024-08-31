@@ -61,6 +61,19 @@
 .cancel:hover{
     border: 1px solid black;
 }
+.rate{
+    height:32px;
+    padding: 0 16px;
+    display: inline;
+    border: none;
+    background-color: green;
+    color: white;
+    border-radius: 4px;
+    transition: border 0.2s ease-in-out;
+}
+.rate:hover{
+    border: 1px solid black;
+}
 .quantity{
     font-size: 1.5rem;
     color: black;
@@ -99,45 +112,7 @@
                 <input class="cat-choice" type="submit" name="status" value="Cancelled" />
             </div>
         </form>
-       <?php
-        $conn = $pdo->open();
-        if($_SERVER['REQUEST_METHOD'] == 'GET' && $_GET['status']){
-            try{	 		
-                $stmt = $conn->prepare("SELECT  *, products.name AS prodName, category.name AS catName, orders.id AS id FROM orders INNER JOIN products ON orders.product_id=products.id INNER JOIN category ON products.category_id=category.id WHERE status = :status");
-                $stmt->execute(['status'=>$_GET['status']]);
-            }
-            catch(PDOException $e){
-                echo "There is some problem in connection: " . $e->getMessage();
-            }
-        }
-        if($stmt){
-            foreach($stmt as $order){
-                $image = (!empty($order['photo'])) ? 'images/'.$order['photo'] : 'images/noimage.jpg';
-            ?>
-            <div class='order-card'>
-                    <div class='child-order-card'>
-                        <a href=<?php echo $image?>><img src=<?php echo $image?> alt='' width='64px' height='64px'></a>
-                        <div class='order-content'>
-                            <div class="titles">
-                                <p class='title'><?php echo $order['prodName']?></p>
-                            </div>
-                            <medium class='category'>Category: <?php echo $order['catName']?></medium>
-                            <p>x<b class='quantity'><?php echo $order['quantity']?></b></p>
-                        </div>
-                    </div>
-                    <div class="trailing">
-                        <p><b>&#x20B1;<?php echo $order['total']?></b></p>
-                        <?php
-                        if($order['status'] == 'Pending'){
-                            echo "<button type='button' class='cancel' data-id='".$order['id']."'>Cancel</button>";
-                        }
-                        ?>
-                    </div>
-                </div>
-            <?php
-            }
-        }
-       ?>
+       <div class="order_details" id="order_details" data-id="<?php echo $_GET['status']?>"></div>
     </div>
 </div>
 <?php include 'includes/footer.php'?>
@@ -145,6 +120,7 @@
 <?php include 'includes/scripts.php'; ?>
 <script>
 $(function(){
+    getDetails();
     $(document).on('click', '.cancel', function(e){
         e.preventDefault();
         var id = $(this).data('id');
@@ -163,5 +139,26 @@ $(function(){
         });
     });
 });
+function getDetails(){
+    $(document).ready(function() {
+        var status = "<?php echo $_GET['status'];?>";
+        $.ajax({
+            type: "GET",
+            url: "order_details.php",
+            data: {
+                status: status,
+            },
+            dataType: 'json',
+            success: function(response) {
+                $('#order_details').html(response);
+            }
+        });
+
+        alert(response);
+    });
+}
+
+
+
 </script>
 </body>

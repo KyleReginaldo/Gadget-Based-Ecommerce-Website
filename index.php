@@ -216,10 +216,10 @@
 							</div>
 						</div>
 					</div>
-					<div class="row title-row" style="margin-bottom: 8px; margin-left: 0; padding: 0;">
+					<!-- <div class="row title-row" style="margin-bottom: 8px; margin-left: 0; padding: 0;">
 						<div class="col-sm-6"><p style="text-align: start; margin: 0; padding: 0; color: #2E2D30; font-family: Arial, sans-serif; font-size: 18px; font-weight: 500;">Our Top Collection</p></div>
 						<div class="col-sm-6" style="text-align: end;"><a href="category.php?category=1">view more</a></div>
-					</div>
+					</div> -->
 						<?php
 							$month = date('m');
 							$conn = $pdo->open();

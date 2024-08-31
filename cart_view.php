@@ -35,10 +35,10 @@
 		        				<th></th>
 		        				<th>Photo</th>
 		        				<th>Name</th>
-		        				<th>Price</th>
+		        				<th width="10%">Price</th>
 		        				<th width="20%">Quantity</th>
-								<th width="20%">Stock</th>
-		        				<th>Subtotal</th>
+								<th width="10%">Stock</th>
+		        				<th width="20%">Subtotal</th>
 								<th><center>Selected</center></th>
 		        			</thead>
 		        			<tbody id="tbody">
@@ -50,23 +50,20 @@
 	        			if(isset($_SESSION['user'])){
 	        		?>
 					<div style='display: flex; justify-content: end;'>
-							
-						<button class="checkout-button"><i class="fa fa-shopping-bag"></i>
-							<!-- <a href=<?php
-							// $stmt = $conn->prepare("SELECT COUNT(*) AS numrows FROM cart WHERE user_id=:user_id AND selected=true");
-							// $stmt->execute(['user_id'=>$_SESSION['user']]);
-							// $result = $stmt->fetch();
-							// if($result['numrows'] > 0){
-							// 	echo 'checkout_view.php';
-							// }
-							?>>Checkout
-							</a> -->
-							<a href='checkout_view.php'>Checkout
-							</a>
-						</button>
+						<?php
+						$stmt = $conn->prepare("SELECT COUNT(*) AS numrows FROM cart WHERE user_id=:user_id AND selected=:selected");
+						$stmt->execute(['user_id'=>$_SESSION['user'],'selected'=>true]);
+						$crow = $stmt->fetch();
+						$redirect = $crow['numrows'] > 0 ? 'checkout_view.php':'';
+						echo "<a href='".$redirect."'>
+							<button class='checkout-button'><i class='fa fa-shopping-bag'></i>Checkout</button>
+						</a>";
+						?>
+						
 					</div>
 					<?php
 					}
+
 					?>
 	        	</div>
 	        	<!-- <div class="col-sm-1">
@@ -178,7 +175,7 @@ $(function(){
 			});
 		}
 	});
-
+	getCart();
 	getDetails();
 	getTotal();
 

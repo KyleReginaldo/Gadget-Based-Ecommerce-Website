@@ -3,8 +3,8 @@
 	$conn = $pdo->open();
 	$output = array('list'=>'','count'=>0);
 	try{
-        $stmt = $conn->prepare("SELECT *,products.name AS prodname , category.name AS catname FROM orders LEFT JOIN products ON orders.product_id=products.id LEFT JOIN category ON products.category_id=category.id WHERE user_id=:user_id");
-        $stmt->execute(['user_id'=>$_SESSION['user']]);
+        $stmt = $conn->prepare("SELECT *,products.name AS prodname , category.name AS catname FROM orders LEFT JOIN products ON orders.product_id=products.id LEFT JOIN category ON products.category_id=category.id WHERE user_id=:user_id AND status!=:status");
+        $stmt->execute(['user_id'=>$_SESSION['user'],'status'=>'Cancelled']);
         foreach($stmt as $row){
             $output['count']++;
             $image = (!empty($row['photo'])) ? 'images/'.$row['photo'] : 'images/noimage.jpg';

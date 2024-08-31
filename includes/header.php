@@ -92,6 +92,9 @@
       width: 100px;
       height: 100px;
     }
+    body::-webkit-scrollbar {
+  	display: none;
+	}
 
     </style>
 

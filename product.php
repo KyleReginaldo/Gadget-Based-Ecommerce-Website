@@ -37,7 +37,17 @@
 		 background-color: white;
 		 border-radius: 8px;
 		 padding: 16px 8px;
+		 border:none;
+		 height: auto;
 		}
+		.box img{
+		border-radius: 4px;
+		object-fit: contain;
+		transition: scale 0.3s ease-in-out;
+		}
+		.box img:hover{
+			scale: 0.8;
+		}	
 		.box b{
 		font-size: 18px;
 		}
@@ -48,23 +58,82 @@
 			margin: 0;
 		}
 		.input-group-btn button{
-			color: blue;
+			color: black;
+			border:1px solid white;
+			background-color: lightgrey;
+		}
+		.input-group{
+			margin-right: 4rem;
+			width: 20%;
 		}
 		.input-group input{
-			width: 80px;
+			/* width: 60px; */
+			border: none;
+		}
+		.add-cart{
+			padding: 0.5rem 2rem;
+			margin: 0 1rem;
+			border-radius: 16px;
+			transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, border 0.2s ease-in-out, border-radius 0.2s ease-in-out;
+		}
+		.add-cart:hover{
+			background-color: white;
+			border: 1px solid blue;
+			color: blue;
+			border-radius: 4px;
 		}
 		.checkout{
-			background-color: #F9E400;
+			padding: 0.5rem 2rem;
+			margin: 0 1rem;
+			border-radius: 16px;
+			border: 1px solid blue;
+			color: blue;
+			transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, border 0.2s ease-in-out, border-radius 0.2s ease-in-out;
+		}
+		.checkout:hover{
+			background-color: blue;
+			border: 1px solid white;
 			color: white;
-			transition: color 0.2s ease-in-out;
+			border-radius: 4px;
 		}
 		.image-container{
-			background-color: #F6F5F5;
+			background-color: #FFFFFF;
 			padding: 24px;
 			border-radius: 8px;
+			border: none;
+			height: 400px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			
+		}
+		.image-container img{
+			object-fit: contain;
+			max-height: 360px;
+			margin: auto;
 		}
 		.form-group{
-			width: 60%;
+			/* width: 60%; */
+			display: flex;
+		}	
+		.truncate {
+    	display: inline-block;
+    	max-width: 100%;
+    	white-space: nowrap;
+    	overflow: hidden;
+    	text-overflow: ellipsis;
+		}
+		.category{
+			margin: 1rem 0;
+			border: 1px solid black;
+			padding: 0.2rem 3rem;
+			border-radius: 25px;
+			cursor: pointer;
+			transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+		}
+		.category:hover{
+			background-color: black;
+			color: white;
 		}
 	</style>
 <script>
@@ -97,30 +166,33 @@
 		            	</div>
 		            	<div class="col-sm-7">
 		            		<h1 class="page-header"><?php echo $product['prodname']; ?></h1>
+							<a class="category" href="category.php?category=<?php echo $product['category_id']; ?>"><?php echo $product['catname']; ?></a>
 		            		<h3><b>&#8369; <?php echo number_format($product['price'], 2); ?></b></h3>
-		            		<p><b>Category:</b> <a href="category.php?category=<?php echo $product['category_id']; ?>"><?php echo $product['catname']; ?></a></p>
+							
 							<form class="" id="productForm" method="post">
+								
 		            			<div class="form-group">
 			            			<div class="input-group col-sm-5">
 			            				<span class="input-group-btn">
-			            					<button type="button" id="minus" class="btn btn-default btn-flat btn-md"><i class="fa fa-minus"></i></button>
+			            					<button type="button" id="minus" class="btn btn-default btn-flat btn-md"><i class="fa fa-chevron-left"></i></button>
 			            				</span>
 							          	<input type="text" name="quantity" id="quantity" class="quantity form-control input-md text-center" value="1">
 							            <span class="input-group-btn">
-							                <button type="button" id="add" class="btn btn-default btn-flat btn-md"><i class="fa fa-plus"></i>
+							                <button type="button" id="add" class="btn btn-default btn-flat btn-md"><i class="fa fa-chevron-right"></i>
 							                </button>
 							            </span>
 							            <input type="hidden" value="<?php echo $product['prodid']; ?>" name="id">
 							        </div>
-			            		</div>
-								<div class="buttons">
+									<div class="buttons">
 									<button type="submit" class="add-cart btn btn-primary btn-md">Add to Cart</button>
 									<a href="cart_view.php" class="checkout btn btn-md" id="checkout">Checkout</a>
 								</div>
+			            		</div>
+								<p><?php echo $product['description']; ?></p>
+
 		            		</form>
 		            	</div>
 		            </div>
-					<p><?php echo $product['description']; ?></p>
 		            <br>
 				    <!-- <div class="fb-comments" data-href="http://localhost/ecommerce/product.php?product=<?php echo $slug; ?>" data-numposts="10" width="100%"></div>  -->
 	        	</div>
@@ -147,15 +219,18 @@
 						    	$inc = ($inc == 3) ? 1 : $inc + 1;
 	       						if($inc == 1) echo "<div class='row'>";
 	       						echo "
-	       							<div class='col-sm-4'>
-											<div class='box'>
-												<div class='box-body prod-body'>
-													<img src='".$image."' width='100%' height='220px' class='fluid'>
-													<b>&#8369; ".number_format($row['price'], 2)."</b>													
-													<h5><a href='product.php?product=".$row['slug']."'>".$row['name']."</a></h5>
+	       							 <a  href='product.php?product=".$row['slug']."'>
+										   <div class='col-sm-4'>
+												<div class='box'>
+													<div class='box-body prod-body'>
+														<img src='".$image."' width='100%' height='220px'>
+														<b>&#8369; ".number_format($row['price'], 2)."</b>
+																									
+														<h5><a href='product.php?product=".$row['slug']."' class='truncate'>".$row['name']."</a></h5>
+													</div>
 												</div>
 											</div>
-										</div>
+										  </a>
 	       						";
 	       						if($inc == 3) echo "</div>";
 						    }

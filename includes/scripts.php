@@ -72,12 +72,15 @@ $(function(){
   		data: product,
   		dataType: 'json',
   		success: function(response){
-  			$('#callout').show();
-  			$('.message').html(response.message);
+			$('.message').html(response.message);
+			$('.error').html(response.error_message);
   			if(response.error){
-  				$('#callout').removeClass('callout-success').addClass('callout-danger');
+				$('#error-callout').show();
+				$('#error-callout').removeClass('callout-success').addClass('callout-danger');
+
   			}
   			else{
+				$('#callout').show();
 				$('#callout').removeClass('callout-danger').addClass('callout-success');
 				getOrders();
   			}

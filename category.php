@@ -39,7 +39,7 @@
 	.box img{
 		border-radius: 4px;
 		object-fit: contain;
-		transition: scale 0.5s ease-in-out;
+		transition: scale 0.3s ease-in-out;
 	}
 	.box img:hover{
 		scale: 0.8;
@@ -77,8 +77,7 @@
 												<div class='box'>
 													<div class='box-body prod-body'>
 														<img src='".$image."' width='100%' height='220px'>
-														<b>&#8369; ".number_format($row['price'], 2)."</b>
-																									
+														<b>&#8369; ".number_format($row['price'], 2)."</b>												
 														<h5><a href='product.php?product=".$row['slug']."' class='truncate'>".$row['name']."</a></h5>
 													</div>
 												</div>
