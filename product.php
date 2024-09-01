@@ -14,7 +14,7 @@
 
 
 	//page view
-	$hideNoDiscount = $product['discount'] === 0 ? 'hidden': '';
+	$hideNoDiscount = $product['discount'] > 0 ? '': 'hidden';
 	$now = date('Y-m-d');
 	if($product['date_view'] == $now){
 		$stmt = $conn->prepare("UPDATE products SET counter=counter+1 WHERE id=:id");
@@ -198,9 +198,9 @@
 			margin-bottom: 1rem;
 		}
 		h5{
-		margin: 0;
-		margin-top: 0.5rem;
-	}
+			margin: 0;
+			margin-top: 0.5rem;
+		}
 	</style>
 <script>
 (function(d, s, id) {
@@ -242,12 +242,12 @@
 							</h1>
 							<a class="category" href="category.php?category=<?php echo $product['category_id']; ?>"><?php echo $product['catname']; ?></a>
 							<h3 $hideNoDiscount><p class="orig-price">&#8369; <?php 
-							$discount = ($product['discount']/100) * $product['price'];
+							$discount = ($product['discount'] / 100) * $product['price'];
 							$originalPrice = $product['price'];
 							$price = $originalPrice - $discount;
 							echo number_format($originalPrice, 2);
 							 ?></p><p class="discount"> - &#8369; <?php echo number_format($discount, 2);?></p></h3>
-		            		<h3 $hideNoDiscount><b>&#8369; <?php echo number_format($price, 2); ?></b></h3>
+		            		<h3 ><b>&#8369; <?php echo number_format($price, 2); ?></b></h3>
 							
 							<form class="" id="productForm" method="post">
 								

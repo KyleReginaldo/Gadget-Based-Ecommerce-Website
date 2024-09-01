@@ -94,6 +94,17 @@
 .cat-choice{
     transition: font-weight 0.2s ease-in-out, background-color 0.2s ease-in-out, color 0.2s ease-in-out, padding 0.2s ease-in-out, border-radius 0.2s ease-in-out;
 }
+.cancelled{
+    border: 1px solid #E78895;
+    color: grey;
+    transition: color 0.3s ease-in-out;
+}
+.cancelled:hover{
+    color: black;
+}
+.rated{
+    border: 1px solid #279EFF;
+}
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -121,7 +132,7 @@
                     input.style.backgroundColor = 'white';
                     input.style.color = 'blue';
                     input.style.padding = '0 1rem';
-                    input.style.borderRadius = '4px';
+                    input.style.borderRadius = '2px';
                 }
             });
         }

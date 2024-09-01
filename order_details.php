@@ -10,8 +10,10 @@ try{
             $image = (!empty($order['photo'])) ? 'images/'.$order['photo'] : 'images/noimage.jpg';
             $hide = $order['status'] == 'Pending'? '': 'hidden';
             $rate = $order['status'] == 'Completed' && !$order['orderRating']? '' : 'hidden';
+            $cancelled = $order['status'] == 'Cancelled'? 'cancelled' : '';
+            $rated = $order['orderRating'] ? 'rated' : '';
             $output .= "
-            <div class='order-card'>
+            <div class='order-card ".$cancelled." ".$rated."'>
                 <div class='child-order-card'>
                     <a href=".$image."><img src=".$image." alt='' width='64px' height='64px'></a>
                     <div class='order-content'>
@@ -30,8 +32,10 @@ try{
             </div>";
         }
     }else{
-        $output = "<div class='text-center'>
-        <h4>Empty :(</h4>
+        $output = "
+        <div class='text-center'>
+        <img src='images/empty.png' class='img-fluid' width='256px'>
+        <h4>Empty</h4>
         <p>This section is currently empty.</p>
         </div>";
     }

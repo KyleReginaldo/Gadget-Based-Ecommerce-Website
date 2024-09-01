@@ -20,12 +20,25 @@
 <?php include 'includes/header.php'; ?>
 <body class="hold-transition skin-blue layout-top-nav">
 <style>
+	@keyframes fadeIn {
+		from {
+			opacity: 0;
+			transform: translateY(20px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
 	.box{
-		 background-color: white;
-		 border-radius: 8px;
-		 padding: 16px 8px;
-		 border:none;
-		 height: auto;
+		background-color: white;
+		border-radius: 8px;
+		padding: 16px 8px;
+		border:none;
+		height: auto;
+		opacity: 0; /* Initial state before animation */
+		animation: fadeIn 0.3s ease-out forwards; /* Apply the animation */
+		animation-delay: 0.2s; /* Optional: delay before the animation starts */
 	}
 	.box b{
 		font-size: 18px;
@@ -66,6 +79,24 @@
 	.fa-star.checked {
 		color: #ffcc00;
 	}
+	.tab-row{
+		display: flex;
+		flex-direction: row;
+		justify-content: start;
+		margin: 24px 0;
+		padding: 8px 0;
+		margin-right: 1rem;
+		color:blue;
+		align-items: center;
+		border-radius: 4px;
+	}
+	.cat-choice{
+		background-color: transparent;
+		border: none;
+		margin-right: 0.5rem;
+		transition: font-weight 0.2s ease-in-out, background-color 0.2s ease-in-out, color 0.2s ease-in-out, padding 0.2s ease-in-out, border-radius 0.2s ease-in-out;
+	}
+	
 </style>
 <div class="wrapper">
 	<?php include 'includes/navbar.php'; ?>
@@ -74,7 +105,15 @@
 	      <section class="content">
 	        <div class="row">
 	        	<div class="col-sm-12">
-		            <h1 class="page-header" style=" margin-bottom: 0; font-weight: 600; color: black;"><?php echo $cat['name']; ?></h1>
+					<form action="" method="get">
+						<div class="tab-row">
+							<button class="cat-choice" type="submit" name="category" value="1" data-id="1">Laptops</button>
+							<button class="cat-choice" type="submit" name="category" value="2" data-id="2">Desktop PC</button>
+							<button class="cat-choice" type="submit" name="category" value="3" data-id="3">Tablets</button>
+							<button class="cat-choice" type="submit" name="category" value="4" data-id="4">Smart Phones</button>
+							<button class="cat-choice" type="submit" name="category" value="8" data-id="8">Accessories</button>
+						</div>
+					</form>
 		       		<?php
 		       			$conn = $pdo->open();
 		       			try{
@@ -133,6 +172,22 @@
   	<?php include 'includes/footer.php'; ?>
 </div>
 <script>
+	document.addEventListener('DOMContentLoaded', function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const category = urlParams.get('category');
+        
+        if (category) {
+            const buttons = document.querySelectorAll('.cat-choice');
+			buttons.forEach(button => {
+				if (button.dataset.id === category) {
+					button.style.backgroundColor = 'blue';
+					button.style.color = 'white';
+					button.style.padding = '0.4rem 1rem';
+					button.style.borderRadius = '16px';
+				}
+			});
+        }
+    });
 	document.addEventListener('DOMContentLoaded', function() {
     var starContainers = document.querySelectorAll('.stars');
     starContainers.forEach(container => {
