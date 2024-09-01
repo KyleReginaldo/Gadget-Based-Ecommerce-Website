@@ -54,7 +54,7 @@
                 <div class="form-group">
                 <label for="name" class="col-sm-1 control-label">Discount%</label>
                   <div class="col-sm-5">
-                    <input type="text" class="form-control" id="discount" name="discount">
+                    <input type="text" class="form-control" id="discount" name="discount" pattern="[0-9]">
                   </div>
                 </div>
                 <div class="form-group">

@@ -214,6 +214,8 @@
 			<div class="review">
 				<?php	
 						$total = 0;
+						$totalSub = 0;
+						$totalDiscount = 0;
 		       			$conn = $pdo->open();
 		       			try{
 		       			 	$inc = 3;	
@@ -223,7 +225,12 @@
 								$_SESSION['productId'] = $row['id'];
 						    	$image = (!empty($row['photo'])) ? 'images/'.$row['photo'] : 'images/noimage.jpg';
 						    	$inc = ($inc == 3) ? 1 : $inc + 1;
-								$subtotal = $row['price'] * $row['quantity'];
+								$originalPrice = $row['price'];
+								$discount = ($row['discount'] / 100) * $row['price'];
+								$price = $originalPrice - $discount;
+								$subtotal = $price * $row['quantity'];
+								$totalDiscount += $discount;
+								$totalSub += $originalPrice * $row['quantity'];
 								$total += $subtotal;
 	       						if($inc == 1) echo "<div class=''>";
 	       						echo "<div class='item-display'>
@@ -249,11 +256,11 @@
 					<div>
 						<div class="between subtotal">
 							<p>Subtotal</p>
-							<?php echo "<p class='subtotal'>&#8369;".number_format($total, 2)."</p>";?>
+							<?php echo "<p class='subtotal'>&#8369;".number_format($totalSub, 2)."</p>";?>
 						</div>
 						<div class="between discount">
 							<p>Discount</p>
-							<?php echo "<p class='discount'>&#8369;".number_format(0, 2)."</p>";?>
+							<?php echo "<p class='discount'>&#8369;".number_format($totalDiscount, 2)."</p>";?>
 						</div>
 						<div class="between">
 							<p>Total</p>

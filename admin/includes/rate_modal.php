@@ -91,7 +91,8 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
             $stmt = $conn->prepare("UPDATE products SET rating=:rating WHERE id=:id");
             $stmt->execute(['id'=>$_SESSION['product_id'],'rating'=>$newRating]);
         }
-           
+        $stmt = $conn->prepare("UPDATE orders SET rating=:rating WHERE id=:id");
+        $stmt->execute(['id'=>$_SESSION['order_id'],'rating'=>$rating]);
     }
     catch(PDOException $e){
     }

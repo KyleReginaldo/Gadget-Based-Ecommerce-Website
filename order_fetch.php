@@ -11,7 +11,7 @@
             $productname = (strlen($row['prodname']) > 30) ? substr_replace($row['prodname'], '...', 27) : $row['prodname'];
             $output['list'] .= "
                 <li>
-                    <a href='orders.php?status=Pending'>
+                    <a href='orders.php?status=".$row['status']."'>
                         <div class='pull-left'>
                             <img src='".$image."' class='fluid' alt='User Image'>
                         </div>

@@ -23,17 +23,28 @@
 		border-radius: 4px;
 		object-fit: contain;
 		transition: scale 0.3s ease-in-out;
-	}
-	.box img:hover{
-		scale: 0.8;
-	}
-	.truncate {
-    	display: inline-block;
-    	max-width: 100%;
-    	white-space: nowrap;
-    	overflow: hidden;
-    	text-overflow: ellipsis;
-	}
+		}
+		.box img:hover{
+			scale: 0.8;
+		}
+		.truncate {
+			display: inline-block;
+			max-width: 100%;
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
+		.fa-star {
+            font-size: 16px;
+            color: #d3d3d3;
+        }
+        .fa-star.checked {
+            color: #ffcc00;
+        }
+		h5{
+		margin: 0;
+		margin-top: 0.5rem;
+		}
 	</style>
 <div class="wrapper">
 
@@ -73,6 +84,13 @@
 														<img src='".$image."' width='100%' height='220px'>
 														<b>&#8369; ".number_format($row['price'], 2)."</b>												
 														<h5><a href='product.php?product=".$row['slug']."' class='truncate'>".$row['name']."</a></h5>
+														<div class='stars' data-rating='".$row['rating']."'>
+															<span class='fa fa-star'></span>
+															<span class='fa fa-star'></span>
+															<span class='fa fa-star'></span>
+															<span class='fa fa-star'></span>
+															<span class='fa fa-star'></span>
+														</div>
 													</div>
 												</div>
 											</div>
@@ -104,7 +122,22 @@
   
   	<?php include 'includes/footer.php'; ?>
 </div>
-
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var starContainers = document.querySelectorAll('.stars');
+    starContainers.forEach(container => {
+        var rating = parseInt(container.getAttribute('data-rating'), 10); // Get rating from data attribute
+        var stars = container.querySelectorAll('.fa-star');
+        stars.forEach((star, index) => {
+            if (index < rating) {
+                star.classList.add('checked');
+            } else {
+                star.classList.remove('checked');
+            }
+        });
+    });
+});
+</script>
 <?php include 'includes/scripts.php'; ?>
 </body>
 </html>

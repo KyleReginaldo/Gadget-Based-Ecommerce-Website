@@ -30,6 +30,9 @@
     align-items: center;
     border-radius: 8px;
     margin-bottom: 1rem;
+    opacity: 0; /* Initial state before animation */
+    animation: fadeIn 0.3s ease-out forwards; /* Apply the animation */
+    animation-delay: 0.2s; /* Optional: delay before the animation starts */
 }
 .child-order-card{
     display: flex;
@@ -88,18 +91,41 @@
     margin-bottom: 1rem;
     font-size: 16px;
 }
+.cat-choice{
+    transition: font-weight 0.2s ease-in-out, background-color 0.2s ease-in-out, color 0.2s ease-in-out, padding 0.2s ease-in-out, border-radius 0.2s ease-in-out;
+}
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 </style>
 <?php include 'includes/header.php'; ?>
 <body class="hold-transition skin-blue layout-top-nav">
 <script>
-    (function(d, s, id) {
-	var js, fjs = d.getElementsByTagName(s)[0];
-	if (d.getElementById(id)) return;
-	js = d.createElement(s); js.id = id;
-	js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.12';
-	fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));
-</script>
+     document.addEventListener('DOMContentLoaded', function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const status = urlParams.get('status');
+        
+        if (status) {
+            const inputs = document.querySelectorAll('.cat-choice');
+            inputs.forEach(input => {
+                if (input.value === status) {
+                    input.style.fontWeight = 'bold';
+                    input.style.backgroundColor = 'white';
+                    input.style.color = 'blue';
+                    input.style.padding = '0 1rem';
+                    input.style.borderRadius = '4px';
+                }
+            });
+        }
+    });
 </script>
 <div class="wrapper">
 <?php include 'includes/navbar.php'; ?>
@@ -142,10 +168,11 @@ $(function(){
     });
     $(document).on("click",".rate",function(){
         var data = $(this).data('product');
+        var orderID = $(this).data('order');
         $.ajax({
         url: 'set_session.php', // The PHP file to handle the request
         type: 'POST',
-        data: { product_id: data },
+        data: { product_id: data, order_id: orderID },
         success: function(response) {
             // You can handle the response here if needed
             console.log('Product ID set in session: ' + response);
@@ -167,8 +194,6 @@ function getDetails(){
                 $('#order_details').html(response);
             }
         });
-
-        alert(response);
     });
 }
 

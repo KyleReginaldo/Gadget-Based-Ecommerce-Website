@@ -12,7 +12,9 @@
 		echo "There is some problem in connection: " . $e->getMessage();
 	}
 
+
 	//page view
+	$hideNoDiscount = $product['discount'] === 0 ? 'hidden': '';
 	$now = date('Y-m-d');
 	if($product['date_view'] == $now){
 		$stmt = $conn->prepare("UPDATE products SET counter=counter+1 WHERE id=:id");
@@ -144,6 +146,61 @@
 			color: red;
 			font-size: 2rem;
 		}
+		.title{
+			font-size: 2rem;
+			font-weight: 600;
+		}
+		.rating-container{
+			background-color: white;
+			padding: 0.6rem 1rem;
+			margin: 1rem 0;
+			border-radius: 8px;
+		}
+		.rating-name{
+			font-size: 1.4rem;
+			margin: 0;
+		}
+		.rating-message{
+			color: black;
+			font-style: italic;
+		}
+		.stars{
+			margin: 0;
+			padding: 0;
+		}
+		.fa-star {
+            font-size: 16px;
+            color: #d3d3d3;
+        }
+        .fa-star.checked {
+            color: #ffcc00;
+        }
+		.rating-title{
+			display: flex;
+			justify-content: space-between;
+		}
+		.rating-title a{
+			cursor: pointer;
+		}
+		.rating-title a:hover{
+			font-weight: 600;
+		}
+		.rating-value{
+			font-weight: 600;
+			color: blue;
+		}
+		.page-header{
+			margin-bottom: 0;
+			pading-bottom: 0;
+		}
+		.product-rating{
+			margin-top: 0.4rem;
+			margin-bottom: 1rem;
+		}
+		h5{
+		margin: 0;
+		margin-top: 0.5rem;
+	}
 	</style>
 <script>
 (function(d, s, id) {
@@ -174,15 +231,23 @@
 		            		<img src="<?php echo (!empty($product['photo'])) ? 'images/'.$product['photo'] : 'images/noimage.jpg'; ?>" width="100%" class="zoom" data-magnify-src="images/large-<?php echo $product['photo']; ?>">
 		            	</div>
 		            	<div class="col-sm-7">
-		            		<h1 class="page-header"><?php echo $product['prodname']; ?></h1>
+		            		<h1 class="page-header"><?php echo $product['prodname']; ?>
+							<div class='stars product-rating' data-rating=<?php echo htmlspecialchars($product['rating']);?>>
+								<span class='fa fa-star'></span>
+								<span class='fa fa-star'></span>
+								<span class='fa fa-star'></span>
+								<span class='fa fa-star'></span>
+								<span class='fa fa-star'></span>
+							</div>
+							</h1>
 							<a class="category" href="category.php?category=<?php echo $product['category_id']; ?>"><?php echo $product['catname']; ?></a>
-							<h3><p class="orig-price">&#8369; <?php 
+							<h3 $hideNoDiscount><p class="orig-price">&#8369; <?php 
 							$discount = ($product['discount']/100) * $product['price'];
 							$originalPrice = $product['price'];
 							$price = $originalPrice - $discount;
 							echo number_format($originalPrice, 2);
 							 ?></p><p class="discount"> - &#8369; <?php echo number_format($discount, 2);?></p></h3>
-		            		<h3><b>&#8369; <?php echo number_format($price, 2); ?></b></h3>
+		            		<h3 $hideNoDiscount><b>&#8369; <?php echo number_format($price, 2); ?></b></h3>
 							
 							<form class="" id="productForm" method="post">
 								
@@ -209,14 +274,74 @@
 		            	</div>
 		            </div>
 		            <br>
-				    <!-- <div class="fb-comments" data-href="http://localhost/ecommerce/product.php?product=<?php echo $slug; ?>" data-numposts="10" width="100%"></div>  -->
-	        	</div>
-	        	<!-- <div class="col-sm-1">
-	        		<?php include 'includes/sidebar.php'; ?>
-	        	</div> -->
 	        </div>
 	      </section>
 	    </div>
+		<div class="container review-container">
+			<?php
+			
+			function timeAgo($timestamp) {
+				$now = new DateTime();
+				$date = new DateTime($timestamp);
+				$interval = $now->diff($date);
+				if ($interval->y > 0) {
+					return $interval->y . ' year' . ($interval->y > 1 ? 's' : '') . ' ago';
+				} elseif ($interval->m > 0) {
+					return $interval->m . ' month' . ($interval->m > 1 ? 's' : '') . ' ago';
+				} elseif ($interval->d > 0) {
+					return $interval->d . ' day' . ($interval->d > 1 ? 's' : '') . ' ago';
+				} elseif ($interval->h > 0) {
+					return $interval->h . ' hour' . ($interval->h > 1 ? 's' : '') . ' ago';
+				} elseif ($interval->i > 0) {
+					return $interval->i . ' minute' . ($interval->i > 1 ? 's' : '') . ' ago';
+				} else {
+					return $interval->s . ' second' . ($interval->s > 1 ? 's' : '') . ' ago';
+				}
+			}
+			$stmt = $conn->prepare("SELECT *, ratings.rating as rating FROM ratings INNER JOIN products ON ratings.product_id=products.id INNER JOIN users ON ratings.user_id=users.id WHERE products.slug=:slug ORDER BY created_at ASC LIMIT 5");
+			$stmt->bindParam(':slug', $slug, PDO::PARAM_STR);
+			$stmt->execute();
+			if($stmt->rowCount() !== 0){
+				echo "
+				<div class='rating-title'>
+					<p class='title'>Reviews</p>
+					<a id='see-more'>see more</a>
+				</div>";
+			}
+			echo '<div id="ratings-container" id="ratings-container">';
+			foreach ($stmt as $row) {
+				echo "<div class='rating-container'>". timeAgo($row['created_at']) ."
+					<p class='rating-name'> " . htmlspecialchars($row['firstname']) . " ". htmlspecialchars($row['lastname']) . "</p>
+					<div class='stars' data-rating=" . htmlspecialchars($row['rating']) . ">
+						<span class='fa fa-star'></span>
+						<span class='fa fa-star'></span>
+						<span class='fa fa-star'></span>
+						<span class='fa fa-star'></span>
+						<span class='fa fa-star'></span>
+						(<span class='rating-value'>".$row['rating']."</span> out of 5)
+					</div>
+					<p class='rating-message'> " . htmlspecialchars($row['message']) . "</p>
+				</div>";
+			}
+			echo '</div>';
+			?>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var starContainers = document.querySelectorAll('.stars');
+    starContainers.forEach(container => {
+        var rating = parseInt(container.getAttribute('data-rating'), 10); // Get rating from data attribute
+        var stars = container.querySelectorAll('.fa-star');
+        stars.forEach((star, index) => {
+            if (index < rating) {
+                star.classList.add('checked');
+            } else {
+                star.classList.remove('checked');
+            }
+        });
+    });
+});
+</script>
+		</div>
 		<div class="container">
 	      <!-- Main content -->
 	      <section class="content">
@@ -240,8 +365,14 @@
 													<div class='box-body prod-body'>
 														<img src='".$image."' width='100%' height='220px'>
 														<b>&#8369; ".number_format($row['price'], 2)."</b>
-																									
 														<h5><a href='product.php?product=".$row['slug']."' class='truncate'>".$row['name']."</a></h5>
+														<div class='stars' data-rating='".$row['rating']."'>
+															<span class='fa fa-star'></span>
+															<span class='fa fa-star'></span>
+															<span class='fa fa-star'></span>
+															<span class='fa fa-star'></span>
+															<span class='fa fa-star'></span>
+														</div>
 													</div>
 												</div>
 											</div>
@@ -274,9 +405,8 @@
 
 <?php include 'includes/scripts.php'; ?>
 <script>
-
-
 $(function(){
+	getReviews();
 	$('#add').click(function(e){
 		e.preventDefault();
 		var quantity = $('#quantity').val();
@@ -293,6 +423,21 @@ $(function(){
 	});
 
 });
+
+function getReviews(){
+    $(document).ready(function() {
+        $.ajax({
+            type: "GET",
+            url: "review_details.php",
+            data: {},
+            dataType: 'json',
+            success: function(response) {
+                $('#ratings-container').html(response);
+            }
+        });
+    });
+}
+
 </script>
 </body>
 </html>
