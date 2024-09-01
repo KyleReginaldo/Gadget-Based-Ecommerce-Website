@@ -49,57 +49,7 @@
                   <th>Full Details</th>
                   <th>Actions</th>
                 </thead>
-                <tbody>
-                  <?php
-                    $conn = $pdo->open();
-
-                    try{
-                      $stmt = $conn->prepare("SELECT  *, users.firstname AS firstname, users.lastname AS lastname, products.name AS prodName, category.name AS catName, orders.id AS orderId, orders.status AS orderStatus FROM orders INNER JOIN users ON orders.user_id=users.id INNER JOIN products ON orders.product_id=products.id INNER JOIN category ON products.category_id=category.id ORDER BY created_at DESC");
-                      $stmt->execute();
-                      foreach($stmt as $row){
-                        $statusColor = 'red';
-                        $hideToShipping = $row['orderStatus'] != 'Pending'? 'disabled': '';
-                        $hideToComplete = $row['orderStatus'] == 'Shipping'? '': 'disabled';
-                        $total = $row['total'];
-                        switch ($row['orderStatus']) {
-                          case 'Pending':
-                            $statusColor = 'grey';
-                            break;
-                          case 'Shipping':
-                            $statusColor = 'skyblue';
-                            break;
-                          case 'Completed':
-                            $statusColor = 'green';
-                            break;
-                          case 'Cancelled':
-                            $statusColor = 'red';
-                            break;
-                          default:
-                            //code block
-                        }
-                        echo "
-                          <tr>
-                            <td class='hidden'></td>
-                            <td>".date('M d, Y', strtotime($row['created_at']))."</td>
-                            <td>".$row['firstname'].' '.$row['lastname']."</td>
-                            <td style='color: ".$statusColor."; font-weight: bold;'>".$row['orderStatus']."</td>
-                            <td>#".$row['order_number']."</td>
-                            <td>&#8369; ".number_format($total, 2)."</td>
-                            <td><button type='button' class='btn btn-info btn-sm btn-flat transact' data-id='".$row['orderId']."'><i class='fa fa-search'></i> View</button></td>
-                            <td>
-                            <button type='button' class='btn btn-info btn-sm btn-flat to-ship' data-id='".$row['orderId']."'  $hideToShipping><i class='fa fa-car'></i> To Ship</button>
-                            <button type='button' class='btn btn-success btn-sm btn-flat to-complete' data-id='".$row['orderId']."' $hideToComplete><i class='fa fa-check'></i> Complete</button>
-                            </td>
-                          </tr>
-                        ";
-                      }
-                    }
-                    catch(PDOException $e){
-                      echo $e->getMessage();
-                    }
-
-                    $pdo->close();
-                  ?>
+                <tbody id="orders_tbody">
                 </tbody>
               </table>
             </div>
@@ -161,6 +111,43 @@ $(function(){
 </script>
 <script>
 $(function(){
+  getDetails();
+
+  $(document).on('click', '.to-complete', function(e){
+      // alert("Hello world");
+        e.preventDefault();
+        var id = $(this).data('id');
+        $.ajax({
+            type: 'POST',
+            url: 'order_complete.php',
+            data: { id: id },
+            dataType: 'json',
+            success: function(response){
+                if(!response.error){
+                  getDetails();
+                }
+            }
+        });
+    });
+
+  $(document).on('click', '.to-ship', function(e){
+    // alert("Hello world");
+      e.preventDefault();
+      var id = $(this).data('id');
+      $.ajax({
+          type: 'POST',
+          url: 'order_shipping.php',
+          data: { id: id },
+          dataType: 'json',
+          success: function(response){
+              if(!response.error){
+                getDetails();
+              }
+          }
+      });
+  });
+
+  
   $(document).on('click', '.transact', function(e){
     e.preventDefault();
     $('#transaction').modal('show');
@@ -173,6 +160,7 @@ $(function(){
       success:function(response){
         $('#date').html(response.date);
         $('#transid').html(response.transaction);
+        $('#address').html(response.address);
         $('#detail').prepend(response.list);
         $('#total').html(response.total);
       }
@@ -182,21 +170,18 @@ $(function(){
   $("#transaction").on("hidden.bs.modal", function () {
       $('.prepend_items').remove();
   });
-
-  $(document).on('click','.to-complete',function(e){
-    e.preventDefault();
-    var id = $(this).data('id'):
-    $.ajax({
-      type: 'POST',
-      url: 'order_complete.php',
-      data: {id:id},
-      dataType: 'json',
-      success:function(response){
-      }
-    });
-  });
 });
 
+function getDetails(){
+	$.ajax({
+		type: 'POST',
+		url: 'orders_page_details.php',
+		dataType: 'json',
+		success: function(response){
+			$('#orders_tbody').html(response);
+		}
+	});
+}
 
 </script>
 </body>

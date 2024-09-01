@@ -13,6 +13,7 @@
 	foreach($stmt as $row){
 		$total = $row['total'];
 		$output['transaction'] = $row['order_number'];
+		$output['address'] = "{$row['region']}, {$row['province']}, {$row['city']}, {$row['baranggay']}, {$row['street']}";
 		$output['date'] = date('M d, Y', strtotime($row['created_at']));
 		$output['list'] .= "
 			<tr class='prepend_items'>
@@ -21,6 +22,9 @@
 				<td>".$row['quantity']."</td>
 				<td>&#8369; ".number_format($row['total'], 2)."</td>
 			</tr>
+			<div>
+			<p>".$row['region']."</p>
+			</div>
 		";
 	}
 	

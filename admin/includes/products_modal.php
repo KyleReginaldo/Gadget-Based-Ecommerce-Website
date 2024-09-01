@@ -43,6 +43,12 @@
                   </div>
                 </div>
                 <div class="form-group">
+                <label for="name" class="col-sm-1 control-label">Discount%</label>
+                  <div class="col-sm-5">
+                    <input type="text" class="form-control" id="discount" name="discount">
+                  </div>
+                </div>
+                <div class="form-group">
                 <label for="name" class="col-sm-1 control-label">Stock</label>
                   <div class="col-sm-5">
                     <input type="text" class="form-control" id="stock" name="stock" required value="1">

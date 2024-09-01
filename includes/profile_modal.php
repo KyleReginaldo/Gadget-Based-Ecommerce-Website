@@ -9,10 +9,13 @@
             </div>
             <div class="modal-body">
               <p>
+                Address: <span id="address"></span>
+              </p>
+              <p>
                 Date: <span id="date"></span>
                 <span class="pull-right">Transaction#: <span id="transid"></span></span> 
               </p>
-              <table class="table table-bordered">
+              <table class="table">
                 <thead>
                   <th>Product</th>
                   <th>Price</th>

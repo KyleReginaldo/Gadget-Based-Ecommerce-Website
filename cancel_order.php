@@ -4,15 +4,25 @@
 	$output = array('error'=>false);
 	$user = $_SESSION['user'];
     $id =  $_POST['id'];
-    try{
+
+    try {
+        if(!isset($id) || empty($id)) {
+            throw new Exception("Order ID is missing");
+        }
+
         $stmt = $conn->prepare("UPDATE orders SET status=:status WHERE id=:id");
         $stmt->execute(['status'=>'Cancelled','id'=>$id]);
-        $output['message'] = 'Order Added';
+        $output['message'] = 'Order Cancelled';
     }
-    catch(PDOException $e){
+    catch(PDOException $e) {
         $output['error'] = true;
         $output['message'] = $e->getMessage();
     }
+    catch(Exception $e) {
+        $output['error'] = true;
+        $output['message'] = $e->getMessage();
+    }
+
     $pdo->close();
 	echo json_encode($output);
 ?>

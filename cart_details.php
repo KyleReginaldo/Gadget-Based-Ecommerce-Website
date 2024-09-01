@@ -9,7 +9,10 @@
 		$stmt->execute(['user'=>$user['id']]);
 		foreach($stmt as $row){
 			$image = (!empty($row['photo'])) ? 'images/'.$row['photo'] : 'images/noimage.jpg';
-			$subtotal = $row['price']*$row['quantity'];
+			$discount = ($row['discount'] / 100) * $row['price'];
+			$originalPrice = $row['price'];
+			$price = $originalPrice - $discount;
+			$subtotal =$price * $row['quantity'];
 			if($row['selected']){
 				$total += $subtotal;
 			}
@@ -19,7 +22,12 @@
 					<td><center><button type='button' data-id='".$row['cartid']."' class='btn btn-danger btn-round delete_cart'><i class='fa fa-remove'></i></button></center></td>
 					<td><img src='".$image."' width='30px' height='30px'></td>
 					<td>".$row['name']."</td>
-					<td>&#8369; ".number_format($row['price'], 2)."</td>
+					<td>
+					&#8369; ".number_format($price, 2)." 
+					</td>
+					<td>
+					&#8369; ".number_format($discount, 2)." 
+					</td>
 					<td class='input-group'>
 						<span class='input-group-btn'>
 							<button type='button' id='minus' class='btn btn-default btn-flat minus' data-id='".$row['cartid']."'><i class='fa fa-minus'></i></button>

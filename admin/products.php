@@ -89,6 +89,7 @@
                   <th>Photo</th>
                   <th>Description</th>
                   <th>Price</th>
+                  <th>Discount%</th>
                   <th>Views Today</th>
                   <th>Tools</th>
                 </thead>
@@ -112,6 +113,7 @@
                             </td>
                             <td><a href='#description' data-toggle='modal' class='btn btn-info btn-sm btn-flat desc' data-id='".$row['id']."'><i class='fa fa-search'></i> View</a></td>
                             <td>&#8369; ".number_format($row['price'], 2)."</td>
+                            <td>".number_format($row['discount'], 2)."%</td>
                             <td>".$counter."</td>
                             <td>
                               <button class='btn btn-success btn-sm edit btn-flat' data-id='".$row['id']."'><i class='fa fa-edit'></i> Edit</button>

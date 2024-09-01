@@ -5,8 +5,8 @@
     $id =  $_POST['id'];
     try{
         $stmt = $conn->prepare("UPDATE orders SET status=:status WHERE id=:id");
-        $stmt->execute(['status'=>'Completed','id'=>$id]);
-        $output['message'] = 'Order Completed';
+        $stmt->execute(['status'=>'Shipping','id'=>$id]);
+        $output['message'] = 'Order is Shipping';
     }
     catch(PDOException $e){
         $output['error'] = true;

@@ -135,6 +135,15 @@
 			background-color: black;
 			color: white;
 		}
+		.orig-price{
+			color: grey;
+			text-decoration: line-through;
+			font-size: 2rem;
+		}
+		.discount{
+			color: red;
+			font-size: 2rem;
+		}
 	</style>
 <script>
 (function(d, s, id) {
@@ -167,7 +176,13 @@
 		            	<div class="col-sm-7">
 		            		<h1 class="page-header"><?php echo $product['prodname']; ?></h1>
 							<a class="category" href="category.php?category=<?php echo $product['category_id']; ?>"><?php echo $product['catname']; ?></a>
-		            		<h3><b>&#8369; <?php echo number_format($product['price'], 2); ?></b></h3>
+							<h3><p class="orig-price">&#8369; <?php 
+							$discount = ($product['discount']/100) * $product['price'];
+							$originalPrice = $product['price'];
+							$price = $originalPrice - $discount;
+							echo number_format($originalPrice, 2);
+							 ?></p><p class="discount"> - &#8369; <?php echo number_format($discount, 2);?></p></h3>
+		            		<h3><b>&#8369; <?php echo number_format($price, 2); ?></b></h3>
 							
 							<form class="" id="productForm" method="post">
 								

@@ -18,7 +18,6 @@
 		}
 		
 		$pdo->close();
-
 		header('location: cart.php?user='.$userid);
 	}
 

@@ -287,8 +287,8 @@
 						<label class="form-label">Barangay <span class="required">*</span></label>
 						<select name="barangay" class="form-control form-control-md" id="barangay"></select>
 						<input type="hidden" class="form-control form-control-md" name="barangay_text" id="barangay-text" required>
-						<label for="street-text" class="form-label">Street (Optional)</label>
-						<input type="text" class="form-control form-control-md" name="street_text" id="street-text">
+						<label for="street-text" class="form-label">Street <span class="required">*</span></label>
+						<input type="text" class="form-control form-control-md" name="street_text" id="street-text" required>
 						<p class="pm-label">Payment Method <span class="required">*</span></p>
 						<div class="payment-method">
 							<p><input type="checkbox" name="COD" id="agree"> Cash On Delivery</p>

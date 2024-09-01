@@ -3,7 +3,7 @@ include 'includes/session.php';
 $conn = $pdo->open();
 $output = '';
 try{ 		
-    $stmt = $conn->prepare("SELECT  *, products.name AS prodName, category.name AS catName, orders.id AS id FROM orders INNER JOIN products ON orders.product_id=products.id INNER JOIN category ON products.category_id=category.id WHERE status = :status");
+    $stmt = $conn->prepare("SELECT  *, products.name AS prodName, category.name AS catName, orders.id AS id FROM orders INNER JOIN products ON orders.product_id=products.id INNER JOIN category ON products.category_id=category.id WHERE status = :status ORDER BY created_at DESC");
     $stmt->execute(['status'=>$_GET['status']]);
     if($stmt){
         foreach($stmt as $order){
@@ -23,9 +23,9 @@ try{
                     </div>
                 </div>
                 <div class='trailing'>
-                    <p><b>&#x20B1; ".$order['total']."</b></p>
+                    <p><b>&#x20B1; ".number_format($order['total'],2)."</b></p>
                     <button type='button' class='cancel' data-id='".$order['id']."' $hide>Cancel</button>
-                    <button type='button' class='rate' data-id='".$order['id']."' $rate>Rate</button>
+                    <button type='button' class='rate' data-id='".$order['id']."' data-product='".$order['product_id']."' data-toggle='modal' data-target='#rating' $rate>Rate</button>
                 </div>
             </div>";
         }

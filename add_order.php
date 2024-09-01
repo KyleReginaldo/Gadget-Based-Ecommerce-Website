@@ -22,7 +22,10 @@
             $stmt->execute(['user_id'=>$_SESSION['user']]);
             foreach($stmt as $row){
                 $orderNumber += $row['id'];
-                $total = $row['productPrice'] * $row['quantity'];
+                $discount = ($row['discount'] / 100) * $row['price'];
+                $originalPrice = $row['productPrice'];
+                $price = $originalPrice - $discount;
+                $total =$price * $row['quantity'];
                 $stmt = $conn->prepare("INSERT INTO orders(order_number,user_id,product_id,quantity,total,region,province,city,baranggay,street) VALUES(:order_number,:user_id,:product_id,:quantity,:total,:region,:province,:city,:baranggay,:street)");
                 $stmt->execute(['order_number'=>$orderNumber,'user_id'=>$user, 'product_id'=> $row['product_id'], 'quantity'=>$row['quantity'], 'total'=>$total,'region'=>$region,'province'=>$province,'city'=>$city,'baranggay'=>$baranggay,'street'=>$street]);
                 $stmt = $conn->prepare("DELETE FROM cart WHERE id=:id");

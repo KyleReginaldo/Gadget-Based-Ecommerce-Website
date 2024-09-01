@@ -36,6 +36,7 @@
 		        				<th>Photo</th>
 		        				<th>Name</th>
 		        				<th width="10%">Price</th>
+								<th width="10%">Discount</th>
 		        				<th width="20%">Quantity</th>
 								<th width="10%">Stock</th>
 		        				<th width="20%">Subtotal</th>

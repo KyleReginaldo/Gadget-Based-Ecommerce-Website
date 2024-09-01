@@ -1,4 +1,5 @@
-<?php include 'includes/session.php'; ?>
+<?php include 'includes/session.php';
+?>
 <style>
 *{
     margin: 0;
@@ -102,6 +103,7 @@
 </script>
 <div class="wrapper">
 <?php include 'includes/navbar.php'; ?>
+<?php include 'admin/includes/rate_modal.php';?>
 <div class="content-wrapper"  style="margin-top: 4rem;">
     <div class="container">
         <form action="" method="get">
@@ -137,6 +139,18 @@ $(function(){
                 }
             }
         });
+    });
+    $(document).on("click",".rate",function(){
+        var data = $(this).data('product');
+        $.ajax({
+        url: 'set_session.php', // The PHP file to handle the request
+        type: 'POST',
+        data: { product_id: data },
+        success: function(response) {
+            // You can handle the response here if needed
+            console.log('Product ID set in session: ' + response);
+        }
+    });
     });
 });
 function getDetails(){
