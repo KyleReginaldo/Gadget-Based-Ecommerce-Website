@@ -21,7 +21,7 @@
     open   : '.control-sidebar-open',
     bg     : '.control-sidebar-bg',
     wrapper: '.wrapper',
-    content: '.content-wrapper',
+    content: '.content-wrapper" style="margin-top: 4rem"',
     boxed  : '.layout-boxed'
   }
 

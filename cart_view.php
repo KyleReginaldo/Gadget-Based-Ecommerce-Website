@@ -16,12 +16,17 @@
 		margin-left: 8px;
 		color: white;
 	}
+	.checkout-button:disabled {
+		background-color: grey;
+		cursor: not-allowed;
+		opacity: 0.6;
+	}
 </style>
 <body class="hold-transition skin-blue layout-top-nav">
 <div class="wrapper">
 	<?php include 'includes/navbar.php'; ?>
 
-	  <div class="content-wrapper">
+	  <div class="content-wrapper" style="margin-top: 4rem">
 	    <div class="container">
 	      <!-- Main content -->
 	      <section class="content">
@@ -51,16 +56,9 @@
 	        			if(isset($_SESSION['user'])){
 	        		?>
 					<div style='display: flex; justify-content: end;'>
-						<?php
-						$stmt = $conn->prepare("SELECT COUNT(*) AS numrows FROM cart WHERE user_id=:user_id AND selected=:selected");
-						$stmt->execute(['user_id'=>$_SESSION['user'],'selected'=>true]);
-						$crow = $stmt->fetch();
-						$redirect = $crow['numrows'] > 0 ? 'checkout_view.php':'';
-						echo "<a href='".$redirect."'>
-							<button class='checkout-button'><i class='fa fa-shopping-bag'></i>Checkout</button>
-						</a>";
-						?>
-						
+						<a href='checkout_view.php' id="checkout-button">
+								<button class='checkout-button'><i class='fa fa-shopping-bag'></i>Checkout</button>
+							</a>
 					</div>
 					<?php
 					}
@@ -119,6 +117,7 @@ $(function(){
 					getDetails();
 					getCart();
 					getTotal();
+					// getRedirect();
 				}
 			}
 		});
@@ -194,6 +193,30 @@ function getDetails(){
 		}
 	});
 }
+// function getRedirect(){
+// 	$.ajax({
+// 		type: 'POST',
+// 		url: 'check_redirect.php',
+// 		dataType: 'json',
+// 		success: function(response){	
+// 			$('#checkout-button').attr('href', response.url);
+// 			if(response.error){
+// 				$('#checkout-button').prop('disabled', true);
+// 			}
+// 		}
+// 	});
+// }
+function getDetails(){
+	$.ajax({
+		type: 'POST',
+		url: 'cart_details.php',
+		dataType: 'json',
+		success: function(response){
+			$('#tbody').html(response);
+			getCart();
+		}
+	});
+}
 
 function buyNow(){
 	alert('This function is on progress');
@@ -212,12 +235,12 @@ function getTotal(){
 <!-- Paypal Express -->
 <script>
 paypal.Button.render({
-    env: 'production', // change for production if app is live,
+    env: 'production', 
 	client: {
-        //sandbox:    'ASb1ZbVxG5ZFzCWLdYLi_d1-k5rmSjvBZhxP2etCxBKXaJHxPba13JJD_D3dTNriRbAv3Kp_72cgDvaZ',
+        
         production: 'AaBHKJFEej4V6yaArjzSx9cuf-UYesQYKqynQVCdBlKuZKawDDzFyuQdidPOBSGEhWaNQnnvfzuFB9SM'
     },
-    commit: true, // Show a 'Pay Now' button
+    commit: true, 
     style: {
     	color: 'gold',
     	size: 'small'
@@ -245,6 +268,6 @@ paypal.Button.render({
 
 }, '#paypal-button');
 </script>
-<script src="https://www.paypal.com/sdk/js?client-id=ASb1ZbVxG5ZFzCWLdYLi_d1-k5rmSjvBZhxP2etCxBKXaJHxPba13JJD_D3dTNriRbAv3Kp_72cgDvaZ&currency=USD"></script>
+<script src="https:
 </body>
 </html>

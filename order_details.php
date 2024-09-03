@@ -3,8 +3,8 @@ include 'includes/session.php';
 $conn = $pdo->open();
 $output = '';
 try{ 		
-    $stmt = $conn->prepare("SELECT  *, products.name AS prodName, category.name AS catName, orders.id AS id, orders.rating AS orderRating FROM orders INNER JOIN products ON orders.product_id=products.id INNER JOIN category ON products.category_id=category.id WHERE status = :status ORDER BY created_at DESC");
-    $stmt->execute(['status'=>$_GET['status']]);
+    $stmt = $conn->prepare("SELECT  *, products.name AS prodName, category.name AS catName, orders.id AS id, orders.rating AS orderRating FROM orders INNER JOIN products ON orders.product_id=products.id INNER JOIN category ON products.category_id=category.id WHERE status=:status AND user_id=:user_id ORDER BY created_at DESC");
+    $stmt->execute(['status'=>$_GET['status'],'user_id'=>$user['id']]);
     if($stmt->rowCount() !== 0){
         foreach($stmt as $order){
             $image = (!empty($order['photo'])) ? 'images/'.$order['photo'] : 'images/noimage.jpg';
@@ -33,7 +33,7 @@ try{
         }
     }else{
         $output = "
-        <div class='text-center'>
+        <div class='text-center empty-content'>
         <img src='images/empty.png' class='img-fluid' width='256px'>
         <h4>Empty</h4>
         <p>This section is currently empty.</p>

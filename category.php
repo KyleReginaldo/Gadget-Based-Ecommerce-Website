@@ -100,7 +100,7 @@
 </style>
 <div class="wrapper">
 	<?php include 'includes/navbar.php'; ?>
-	  <div class="content-wrapper" style="margin-top: 4rem;">
+	  <div class="content-wrapper" style="margin-top: 4rem">
 	    <div class="container">
 	      <section class="content">
 	        <div class="row">

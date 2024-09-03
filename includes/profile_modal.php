@@ -84,13 +84,6 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="address" class="col-sm-1 control-label">Address</label>
-
-                    <div class="col-sm-12">
-                      <textarea class="form-control" id="address" name="address"><?php echo $user['address']; ?></textarea>
-                    </div>
-                </div>
-                <div class="form-group">
                     <label for="photo" class="col-sm-1 control-label">Photo</label>
 
                     <div class="col-sm-12">

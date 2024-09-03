@@ -1,5 +1,4 @@
-<?php include 'includes/session.php';
-?>
+<?php include 'includes/session.php';?>
 <style>
 *{
     margin: 0;
@@ -105,6 +104,13 @@
 .rated{
     border: 1px solid #279EFF;
 }
+
+.empty-content{
+    opacity: 0; /* Initial state before animation */
+    animation: fadeIn 0.3s ease-out forwards; /* Apply the animation */
+    animation-delay: 0.2s; /* Optional: delay before the animation starts */
+}
+
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -141,7 +147,7 @@
 <div class="wrapper">
 <?php include 'includes/navbar.php'; ?>
 <?php include 'admin/includes/rate_modal.php';?>
-<div class="content-wrapper"  style="margin-top: 4rem;">
+<div class="content-wrapper" style="margin-top: 4rem" >
     <div class="container">
         <form action="" method="get">
             <div class="tab-row">

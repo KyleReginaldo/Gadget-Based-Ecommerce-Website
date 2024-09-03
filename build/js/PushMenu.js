@@ -21,7 +21,7 @@
     collapsed     : '.sidebar-collapse',
     open          : '.sidebar-open',
     mainSidebar   : '.main-sidebar',
-    contentWrapper: '.content-wrapper',
+    contentWrapper: '.content-wrapper" style="margin-top: 4rem"',
     searchInput   : '.sidebar-form .form-control',
     button        : '[data-toggle="push-menu"]',
     mini          : '.sidebar-mini',
@@ -58,7 +58,7 @@
     }
 
     $(Selector.contentWrapper).click(function () {
-      // Enable hide menu when clicking on the content-wrapper on small screens
+      // Enable hide menu when clicking on the content-wrapper" style="margin-top: 4rem" on small screens
       if ($(window).width() <= this.options.collapseScreenSize && $('body').hasClass(ClassName.open)) {
         this.close()
       }

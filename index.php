@@ -166,7 +166,7 @@
 <div class="wrapper">
 
 	<?php include 'includes/navbar.php'; ?>
-	<div class="content-wrapper">
+	<div class="content-wrapper" style="margin-top: 4rem">
 	<img class="banner" src="images/jambol-banner.png" alt="">
 		<div class="container">
 			<section class="content">
@@ -255,9 +255,6 @@
 
 						?> 
 					</div>
-					<!-- <div class="col-sm-1">
-						<?php include 'includes/sidebar.php'; ?>
-					</div> -->
 				</div>
 	      </section>
 		  <p style="text-align: center; margin-bottom: 8px; color: #4400FF; font-family: Arial, sans-serif; font-size: 18px; font-weight: 600;">About Jambol</p>

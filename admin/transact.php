@@ -17,7 +17,7 @@
 		$output['date'] = date('M d, Y', strtotime($row['created_at']));
 		$output['list'] .= "
 			<tr class='prepend_items'>
-				<td>".$row['name']."</td>
+				<td>".$row['prodName']."</td>
 				<td>&#8369; ".number_format($row['price'], 2)."</td>
 				<td>".$row['quantity']."</td>
 				<td>&#8369; ".number_format($row['total'], 2)."</td>

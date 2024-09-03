@@ -63,6 +63,7 @@ $(function(){
   		}
   	});
   });
+  
   $('#checkoutForm').submit(function(e){
   	e.preventDefault();
   	var product = $(this).serialize();
@@ -72,16 +73,14 @@ $(function(){
   		data: product,
   		dataType: 'json',
   		success: function(response){
-			$('.message').html(response.message);
-			$('.error').html(response.error_message);
+			$('.message').html(response);
   			if(response.error){
 				$('#error-callout').show();
 				$('#error-callout').removeClass('callout-success').addClass('callout-danger');
-
-  			}
-  			else{
-				$('#callout').show();
-				$('#callout').removeClass('callout-danger').addClass('callout-success');
+  			}else{	
+				$('#place-order').hide();
+				$('#success-callout').show();
+				$('#success-callout').removeClass('callout-danger').addClass('callout-success');
 				getOrders();
   			}
   		}

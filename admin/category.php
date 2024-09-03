@@ -7,7 +7,7 @@
   <?php include 'includes/menubar.php'; ?>
 
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
+  <div class="content-wrapper" style="margin-top: 4rem">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>

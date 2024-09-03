@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <title>Check out</title>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https:
 	<script src="ph-address-selector.js"></script>
     <style>
 		*{
@@ -93,7 +93,7 @@
 			font-weight: bold;
 		}
 		.between{
-			/* margin: 0 8px; */
+		
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
@@ -118,7 +118,7 @@
 			color: white;
 			background-color: blue;
 			border: none;
-			border-radius: 8px;
+			border-radius: 4px;
 		}
 		.place-order:focus{
 			border:none;
@@ -151,15 +151,33 @@
 			border: 1px solid blue;
 			color:blue;
 		}
-		.callout{
+		.success-callout{
 			display: flex;
 			justify-content: space-between;
 			margin: 1rem 0;
+			background-color: white;
+			align-items: center;
+			padding: 0.4rem 1rem;
+			border-radius: 4px;
+			color: black;
 		}
-		.callout a{
+		.success-callout span{
+			color: black;
+		}
+		.success-callout a{
 			cursor: pointer;
 			color: blue;
 			text-decoration: none;
+			padding: 0.4rem 0.6rem;
+			border-radius: 4px;
+			transition: background-color 0.4s ease-in-out;
+		}
+		.success-callout a:hover{
+			color: black;
+			text-decoration: none;
+			padding: 0.4rem 0.6rem;
+			background-color: blue;
+			border-radius: 4px;
 		}
 		.error-callout{
 			display: flex;
@@ -201,6 +219,45 @@
 			height: 16px;
 			margin-right: 1rem;
 		}
+		.address-container{
+			background-color: #F5F5F5;
+			margin: 0.5rem 0;
+			padding: 0.8rem;
+			border-radius: 8px;
+		}
+		.selected-address{
+			border: 2px solid blue;
+			opacity: 0;
+			animation: fadeIn 0.3s ease-out forwards;
+			animation-delay: 0.2s;
+			font-size: 1.1rem;
+			font-weight: 600;
+			color: blue;
+		}
+		.address-checkbox{
+			margin: 0 0.5rem;
+		}
+		.content-header{
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+		}
+		.label{
+			font-size: 0.9rem;
+			color: grey;
+		}
+		.content{
+			font-size: 1rem;
+			color: black;
+		}
+		@keyframes fadeIn {
+			from {
+				opacity: 0;
+			}
+			to {
+				opacity: 1;
+			}
+		}
     </style>
 	<link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
 </head>
@@ -220,7 +277,7 @@
 		       			try{
 		       			 	$inc = 3;	
                             $stmt = $conn->prepare("SELECT * FROM cart INNERT JOIN products ON product_id = products.id WHERE user_id = :userid AND selected=true");
-                            $stmt->execute(['userid' => $_SESSION['user']]);
+                            $stmt->execute(['userid' => $user['id']]);
 						    foreach ($stmt as $row) {
 								$_SESSION['productId'] = $row['id'];
 						    	$image = (!empty($row['photo'])) ? 'images/'.$row['photo'] : 'images/noimage.jpg';
@@ -267,21 +324,30 @@
 							<?php echo "<p class='total'>&#8369;".number_format($total, 2)."</p>";?>
 						</div>
 						<p class="agree"><input type="checkbox" name="agree" id="agree" required> I have read and agree to the Terms and Condition</p>
-						<button type="submit" class="place-order">Place Order</button>
-						<div class="callout" id="callout" style="display:none;">
-							<span class="message" style="color: green;"></span>
-							<a href="orders.php?status=Pending">go to Order</a>
+						<?php
+						$show = $user['addressId'] ? "" : "hidden"; 
+						echo '<button type="submit" class="place-order" id="place-order" '.$show.'>Place Order</button>';
+						?>
+						<div class="success-callout" id="success-callout" style="display:none;">
+							<span class="message">Order placed</span>
+							<a href="orders.php?status=Pending"><i class="fa fa-shopping-bag"></i> go to Order</a>
 	        			</div>
 					</div>
 			</div>
 			</div>
 			<div class="left-container col-md-6">
 					<p class="checkout-title"><a href="cart_view.php"><i class="back fa fa-chevron-left"></i></a> Checkout</p>
-					<h6 class="checkout-subtitle">Shipping Information</h6>
 					<div class="error-callout" id="error-callout" style="display:none;">
 						<span class="error" style="color: red; margin: 0; padding: 0;"></span>
 					</div>
-					<div class="left-container-child">
+					<h6 class="checkout-subtitle">Personal Details</h6>
+					<p class="label">Name: <span class="content"><?php echo $user['firstname'].' '.$user['lastname']?></span></p>
+					<p class="label">Contact: <span class="content"><?php echo $user['contact_info']? $user['contact_info']:'no contact' ?></span></p>
+					<br>
+					<h6 class="checkout-subtitle">Shipping Information</h6>
+					<div id="address-view"></div>
+					<div id="no-address"></div>
+					<!-- <div class="left-container-child">
 						<label class="form-label">Region <span class="required">*</span></label>
 						<select name="region" class="form-control form-control-md" id="region"></select>
 						<input type="hidden" class="form-control form-control-md" name="region_text" id="region-text" required>
@@ -302,13 +368,62 @@
 							<p><input type="checkbox" name="GCash" id="agree" disabled> GCash</p>
 							<p><input type="checkbox" name="Maya" id="agree" disabled> Maya</p>
 						</div>
-					</div>
+					</div> -->
 			</div>
         </div>
     </div>	
 	</form>
 	<?php include 'includes/scripts.php'; ?>
-
 </body>
+<script>
+$(function(){
+	getAddress();
+	$(document).on('change', '.address-checkbox', function(e){
+		e.preventDefault();
+		var id = $(this).data('id');
+		var isChecked = $(this).is(':checked') ? 1 : 0;
+		$.ajax({
+			type: 'POST',
+			url: 'update_address.php',
+			data: {
+				id:id,
+				selected: isChecked,
+			},
+			dataType: 'json',
+			success: function(response){
+				if(!response.error){
+					getAddress();
+				}
+			}
+		});
+	});
+});
+// function getRedirect(){
+// 	$.ajax({
+// 		type: 'POST',
+// 		url: 'check_redirect.php',
+// 		dataType: 'json',
+// 		success: function(response){	
+// 			$('#checkout-button').attr('href', response.url);
+// 			if(response.error){
+// 				$('#checkout-button').prop('disabled', true);
+// 			}
+// 		}
+// 	});
+// }
+function getAddress(){
+    $(document).ready(function() {
+        $.ajax({
+            type: "POST",
+            url: "fetch_address_checkout.php",
+            // data: {},
+            dataType: 'json',
+            success: function(response) {
+                $('#address-view').html(response);
+            }
+        });
+    });
+}
+</script>
 </html>
 

@@ -43,13 +43,12 @@
         <div style="flex: 1; margin: 10px;">
             <h3 style="color: #f2f2f2;">Customer Support</h3>
             <ul style="list-style: none; padding: 0;">
-                <li><a href="#" style="color: #f2f2f2; text-decoration: none;">Track Your Order</a></li>
+                <li><a href="orders.php?status=Pending" style="color: #f2f2f2; text-decoration: none;">Track Your Order</a></li>
                 <li><a href="terms_condition.php" style="color: #f2f2f2; text-decoration: none;">Terms & Conditions</a></li>
                 <li><a href="#" style="color: #f2f2f2; text-decoration: none;">Privacy Policy</a></li>
             </ul>
         </div>
 
-        <!-- Newsletter Subscription & Social Media -->
         <div style="flex: 1; margin: 10px;">
             <h3 style="color: #f2f2f2;">Stay Connected</h3>
             <p style="line-height: 1.6;">Subscribe to our newsletter for the latest updates and offers:</p>

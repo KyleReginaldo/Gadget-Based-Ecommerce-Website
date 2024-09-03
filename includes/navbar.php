@@ -1,6 +1,3 @@
-
-
-
 <header class="main-header" style="position:fixed; width:100%;">
   <nav class="navbar navbar-static-top">
     <div class="container">
@@ -10,19 +7,27 @@
           <i class="fa fa-bars"></i>
         </button>
       </div>
-
+      
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
+      <!-- <?php
+      if(isset($_SESSION['user'])){
+        if($user['addressId']){
+          echo '<div class="address-nav" style="background-color: white; max-width: 55%; box-sizing: content-box; padding: 0.4rem 1rem; border-radius: 4px; margin-top: 1rem; display: flex;">
+          <a href="user_address.php" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: inline-block; max-width: 100%;">
+              '.$user["region"].', '.$user["province"].', '.$user["city"].', '.$user["baranggay"].', '.$user["street"].'
+          </a>
+      </div>';
+      }
+    }
+        ?> -->
         <ul class="nav navbar-nav">
           <li><a href="index.php#">Home</a></li>
-          <!--<li><a href="Contact Us"></a></li>-->
           <?php
           if(isset($_SESSION['user'])){
             echo "<li><a href='orders.php?status=Pending'>Orders</a></li>";
           }
-          ?>
-         <li><a href="index.php#about">About Us</a></li> 
-          <li><a href="index.php#contactus">Contact Us</a></li>       
+          ?>      
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Category <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
@@ -46,6 +51,8 @@
               ?>
             </ul>
           </li>
+          <li><a href="index.php#about">About Us</a></li> 
+          <li><a href="index.php#contactus">Contact Us</a></li> 
         </ul>
         <form method="POST" class="navbar-form navbar-left" action="search.php">
           <div class="input-group">
@@ -60,6 +67,20 @@
       <!-- Navbar Right Menu -->
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
+          <li class="dropdown messages-menu">
+            <a href="orders.php?status=Pending" class="dropdown-toggle" data-toggle="dropdown">
+              <i class="fa fa-shopping-bag"></i>
+              <span class="label label-success order_count"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li class="header">You have <span class="order_count"></span> order(s)</li>
+              <li>
+                <ul class="menu" id="order_menu">
+                </ul>
+              </li>
+              <li class="footer"><a href="orders.php?status=Pending">Go to Order</a></li>
+            </ul>
+          </li>
           <li class="dropdown messages-menu">
             <!-- Menu toggle button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -81,13 +102,13 @@
               echo '
                 <li class="dropdown user user-menu">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    <img src="'.$image.'" class="user-image" alt="User Image">
+                    <img src="'.$image.'" class="user-image" alt="User Image" style="object-fit: cover;">
                     <span class="hidden-xs">'.$user['firstname'].' '.$user['lastname'].'</span>
                   </a>
                   <ul class="dropdown-menu">
                     <!-- User image -->
-                    <li class="user-header">
-                      <img src="'.$image.'" class="img-circle" alt="User Image">
+                    <li class="user-header" style="background-color: #1229ff">
+                      <img src="'.$image.'" class="img-circle" alt="User Image" style="object-fit: cover;">
 
                       <p>
                         '.$user['firstname'].' '.$user['lastname'].'
@@ -112,24 +133,6 @@
               ";
             }
           ?>
-        </ul>
-      </div>
-      <div class="navbar-custom-menu">
-        <ul class="nav navbar-nav">
-          <li class="dropdown messages-menu">
-            <a href="orders.php?status=Pending" class="dropdown-toggle" data-toggle="dropdown">
-              <i class="fa fa-shopping-bag"></i>
-              <span class="label label-success order_count"></span>
-            </a>
-            <ul class="dropdown-menu">
-              <li class="header">You have <span class="order_count"></span> order(s)</li>
-              <li>
-                <ul class="menu" id="order_menu">
-                </ul>
-              </li>
-              <!-- <li class="footer"><a href="checkout_view.php">Go to Orders</a></li> -->
-            </ul>
-          </li>
         </ul>
       </div>
     </div>

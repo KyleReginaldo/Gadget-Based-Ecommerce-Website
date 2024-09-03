@@ -10,10 +10,8 @@
 
 	<?php include 'includes/navbar.php'; ?>
 	 
-	  <div class="content-wrapper" style="margin-top: 4rem;">
+	  <div class="content-wrapper" style="margin-top: 4rem">
 	    <div class="container">
-
-	      <!-- Main content -->
 	      <section class="content">
 	        <div class="row">
 	        	<div class="col-sm-12">
@@ -38,28 +36,36 @@
 	        		?>
 	        		<div class="box box-solid">
 	        			<div class="box-body">
-	        				<div class="col-sm-1">
-	        					<img src="<?php echo (!empty($user['photo'])) ? 'images/'.$user['photo'] : 'images/profile.jpg'; ?>" width="100%">
+	        				<div class="col-sm-1" style="">
+	        					<img src="<?php echo (!empty($user['photo'])) ? 'images/'.$user['photo'] : 'images/profile.jpg'; ?>" width="100rem" height="100rem" style="object-fit: cover; border-radius: 8px; border: 2px solid lightgreen; margin-bottom: 1rem;">
+								<a href="#edit" class="btn btn-success btn-flat btn-sm" data-toggle="modal"><i class="fa fa-edit"></i> Edit</a>
 	        				</div>
 	        				<div class="col-sm-12">
 	        					<div class="row">
-	        						<!-- <div class="col-sm-1">
-	        							<h4>Name:</h4>
-	        							<h4>Email:</h4>
-	        							<h4>Contact Info:</h4>
-	        							<h4>Address:</h4>
-	        							<h4>Member Since:</h4>
-	        						</div> -->
+
 	        						<div class="col-sm-12">
-	        							<h4><?php echo $user['firstname'].' '.$user['lastname']; ?>
-	        								<span class="pull-right">
-	        									<a href="#edit" class="btn btn-success btn-flat btn-sm" data-toggle="modal"><i class="fa fa-edit"></i> Edit</a>
-	        								</span>
-	        							</h4>
-	        							<h4><?php echo $user['email']; ?></h4>
-	        							<h4><?php echo (!empty($user['contact_info'])) ? $user['contact_info'] : 'N/A'; ?></h4>
-	        							<h4><?php echo (!empty($user['address'])) ? $user['address'] : 'N/A'; ?></h4>
-	        							<h4><?php echo date('M d, Y', strtotime($user['created_on'])); ?></h4>
+	        							<p style="color: grey; margin-top: 1rem; font-size: 1.5rem;">Full name:
+										<span style="color: black;"><?php echo $user['firstname'].' '.$user['lastname']; ?></span>
+										</p>
+	        							<p style="color: grey; font-size: 1.5rem;">Email:
+										<span style="color: black;"><?php echo $user['email']; ?></span>
+										</p>
+	        							<p style="color: grey; font-size: 1.5rem;">Contact No.:
+										<span style="color: black;"><?php echo (!empty($user['contact_info'])) ? $user['contact_info'] : 'N/A'; ?></span>
+										</p>
+	        							<?php
+										if($user['addressId']){
+											?>
+										<p style="color: grey; font-size: 1.5rem;">Address: 
+										<span style="color: black;"><?php echo $user['region'].", ".$user['province'].", ".$user['city'].", ".$user['baranggay'].", ".$user['street']?></span>
+										</p>
+										<?php
+										}
+										?>
+										<a href="user_address.php" class="btn btn-info btn-flat btn-sm"><i class="fa fa-search"></i> View Address</a>
+	        							<p style="color: grey; font-size: 1.5rem;">Account created:
+										<span style="color: black;"><?php echo date('M d, Y', strtotime($user['created_on'])); ?></span>
+										</p>
 	        						</div>
 	        					</div>
 	        				</div>
@@ -83,26 +89,19 @@
 	        						$conn = $pdo->open();
 
 	        						try{
-	        							$stmt = $conn->prepare("SELECT * FROM sales WHERE user_id=:user_id ORDER BY sales_date DESC");
-	        							$stmt->execute(['user_id'=>$user['id']]);
-	        							foreach($stmt as $row){
-	        								$stmt2 = $conn->prepare("SELECT * FROM details LEFT JOIN products ON products.id=details.product_id WHERE sales_id=:id");
-	        								$stmt2->execute(['id'=>$row['id']]);
-	        								$total = 0;
-	        								foreach($stmt2 as $row2){
-	        									$subtotal = $row2['price']*$row2['quantity'];
-	        									$total += $subtotal;
-	        								}
-	        								echo "
+	        							$stmt2 = $conn->prepare("SELECT *, orders.created_at AS ordersDate, orders.total AS total, orders.id AS orderId FROM orders INNER JOIN products ON orders.product_id=products.id WHERE orders.user_id=:user_id AND orders.status=:status ORDER BY created_at DESC");
+	        								$stmt2->execute(['user_id'=>$_SESSION['user'],'status'=>'Completed']);
+	        								foreach($stmt2 as $row){
+												echo "
 	        									<tr>
 	        										<td class='hidden'></td>
-	        										<td>".date('M d, Y', strtotime($row['sales_date']))."</td>
-	        										<td>".$row['pay_id']."</td>
-	        										<td>&#8369; ".number_format($total, 2)."</td>
-	        										<td><button class='btn btn-sm btn-flat btn-info transact' data-id='".$row['id']."'><i class='fa fa-search'></i> View</button></td>
+	        										<td>".date('M d, Y', strtotime($row['ordersDate']))."</td>
+	        										<td>".$row['order_number']."</td>
+	        										<td>&#8369; ".number_format($row['total'], 2)."</td>
+	        										<td><button type='button' class='btn btn-info btn-sm btn-flat transact' data-id='".$row['orderId']."'><i class='fa fa-search'></i> View</button></td>
 	        									</tr>
 	        								";
-	        							}
+	        								}
 
 	        						}
         							catch(PDOException $e){
@@ -116,19 +115,18 @@
 	        			</div>
 	        		</div>
 	        	</div>
-	        	<!-- <div class="col-sm-1">
-	        		<?php include 'includes/sidebar.php'; ?>
-	        	</div> -->
 	        </div>
 	      </section>
 	     
 	    </div>
 	  </div>
   
-  	<?php include 'includes/footer.php'; ?>
   	<?php include 'includes/profile_modal.php'; ?>
-</div>
+	<?php include 'includes/address_modal.php'; ?>
+  	<?php include 'includes/footer.php'; ?>
+	
 
+</div>
 <?php include 'includes/scripts.php'; ?>
 <script>
 $(function(){
