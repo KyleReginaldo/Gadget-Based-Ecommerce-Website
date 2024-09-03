@@ -20,7 +20,7 @@ try{
                     </h5>
                 </div>
                 <div class="actions">
-                    <a href="#edit-address" data-toggle="modal"><button type="button" class="edit-address">Edit</button></a>
+                    <a href="edit_address.php?id='.$row['id'].'" data-toggle="modal"><button type="button" class="edit-address">Edit</button></a>
                     <button type="button" class="delete-address" data-id="'.$row['id'].'">Delete</button>
                 </div>
             </div>

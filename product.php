@@ -264,9 +264,10 @@
 							            <input type="hidden" value="<?php echo $product['prodid']; ?>" name="id">
 							        </div>
 									<div class="buttons">
-									<button type="submit" class="add-cart btn btn-primary btn-md">Add to Cart</button>
-									<a href="cart_view.php" class="checkout btn btn-md" id="checkout">Checkout</a>
-								</div>
+										<button type="submit" class="add-cart btn btn-primary btn-md">Add to Cart</button>
+										<a href="cart_view.php" class="checkout btn btn-md" id="checkout">Checkout</a>
+									</div>
+									
 			            		</div>
 								<p><?php echo $product['description']; ?></p>
 
@@ -298,29 +299,37 @@
 					return $interval->s . ' second' . ($interval->s > 1 ? 's' : '') . ' ago';
 				}
 			}
-			$stmt = $conn->prepare("SELECT *, ratings.rating as rating FROM ratings INNER JOIN products ON ratings.product_id=products.id INNER JOIN users ON ratings.user_id=users.id WHERE products.slug=:slug ORDER BY created_at ASC LIMIT 5");
+			$stmt = $conn->prepare("SELECT *, ratings.rating as rating, users.photo AS userPhoto FROM ratings INNER JOIN products ON ratings.product_id=products.id INNER JOIN users ON ratings.user_id=users.id WHERE products.slug=:slug ORDER BY created_at DESC LIMIT 5");
 			$stmt->bindParam(':slug', $slug, PDO::PARAM_STR);
 			$stmt->execute();
 			if($stmt->rowCount() !== 0){
 				echo "
 				<div class='rating-title'>
 					<p class='title'>Reviews</p>
-					<a id='see-more'>see more</a>
+					<a href='rating_view.php?slug=".$product['slug']."' id='see-more'>see more</a>
 				</div>";
 			}
 			echo '<div id="ratings-container" id="ratings-container">';
 			foreach ($stmt as $row) {
-				echo "<div class='rating-container'>". timeAgo($row['created_at']) ."
-					<p class='rating-name'> " . htmlspecialchars($row['firstname']) . " ". htmlspecialchars($row['lastname']) . "</p>
-					<div class='stars' data-rating=" . htmlspecialchars($row['rating']) . ">
-						<span class='fa fa-star'></span>
-						<span class='fa fa-star'></span>
-						<span class='fa fa-star'></span>
-						<span class='fa fa-star'></span>
-						<span class='fa fa-star'></span>
-						(<span class='rating-value'>".$row['rating']."</span> out of 5)
+				$image = (!empty($row['userPhoto'])) ? 'images/'.$row['userPhoto'] : 'images/profile.jpg';
+				echo "<div class='rating-container'>
+				<div style='display: flex;'>
+				<img src=".$image." width='64px' height='64px' style='object-fit: cover; border-radius: 8px; border: 2px solid lightgreen; margin-bottom: 1rem; margin-right: 1rem;'>
+					<div>
+						
+						<p class='rating-name'> " . htmlspecialchars($row['firstname']) . " ". htmlspecialchars($row['lastname']) . "</p>
+						<p class='rating-name'>". timeAgo($row['created_at']) ."</p>
+						<div class='stars' data-rating=" . htmlspecialchars($row['rating']) . ">
+							<span class='fa fa-star'></span>
+							<span class='fa fa-star'></span>
+							<span class='fa fa-star'></span>
+							<span class='fa fa-star'></span>
+							<span class='fa fa-star'></span>
+							(<span class='rating-value'>".$row['rating']."</span> out of 5)
+						</div>
+						<p class='rating-message'> " . htmlspecialchars($row['message']) . "</p>
 					</div>
-					<p class='rating-message'> " . htmlspecialchars($row['message']) . "</p>
+				</div>
 				</div>";
 			}
 			echo '</div>';

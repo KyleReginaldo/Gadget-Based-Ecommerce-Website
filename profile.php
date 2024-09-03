@@ -8,8 +8,7 @@
 <body class="hold-transition skin-blue layout-top-nav">
 <div class="wrapper">
 
-	<?php include 'includes/navbar.php'; ?>
-	 
+<?php include 'includes/navbar.php'; ?>
 	  <div class="content-wrapper" style="margin-top: 4rem">
 	    <div class="container">
 	      <section class="content">
@@ -53,6 +52,8 @@
 	        							<p style="color: grey; font-size: 1.5rem;">Contact No.:
 										<span style="color: black;"><?php echo (!empty($user['contact_info'])) ? $user['contact_info'] : 'N/A'; ?></span>
 										</p>
+										<a href="user_address.php" class="btn btn-info btn-flat btn-sm"><i class="fa fa-search"></i> View Address</a>
+
 	        							<?php
 										if($user['addressId']){
 											?>
@@ -62,7 +63,6 @@
 										<?php
 										}
 										?>
-										<a href="user_address.php" class="btn btn-info btn-flat btn-sm"><i class="fa fa-search"></i> View Address</a>
 	        							<p style="color: grey; font-size: 1.5rem;">Account created:
 										<span style="color: black;"><?php echo date('M d, Y', strtotime($user['created_on'])); ?></span>
 										</p>
@@ -117,10 +117,8 @@
 	        	</div>
 	        </div>
 	      </section>
-	     
 	    </div>
 	  </div>
-  
   	<?php include 'includes/profile_modal.php'; ?>
 	<?php include 'includes/address_modal.php'; ?>
   	<?php include 'includes/footer.php'; ?>
@@ -128,6 +126,7 @@
 
 </div>
 <?php include 'includes/scripts.php'; ?>
+
 <script>
 $(function(){
 	$(document).on('click', '.transact', function(e){
@@ -148,9 +147,9 @@ $(function(){
 		});
 	});
 
-	$("#transaction").on("hidden.bs.modal", function () {
-	    $('.prepend_items').remove();
-	});
+		// $("#transaction").on("hidden.bs.modal", function () {
+		//     $('.prepend_items').remove();
+		// });
 });
 </script>
 </body>

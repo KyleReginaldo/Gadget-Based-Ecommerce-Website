@@ -45,7 +45,6 @@
             <ul style="list-style: none; padding: 0;">
                 <li><a href="orders.php?status=Pending" style="color: #f2f2f2; text-decoration: none;">Track Your Order</a></li>
                 <li><a href="terms_condition.php" style="color: #f2f2f2; text-decoration: none;">Terms & Conditions</a></li>
-                <li><a href="#" style="color: #f2f2f2; text-decoration: none;">Privacy Policy</a></li>
             </ul>
         </div>
 

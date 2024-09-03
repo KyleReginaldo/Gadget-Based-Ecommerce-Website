@@ -258,6 +258,17 @@
 				opacity: 1;
 			}
 		}
+		.ship-header{
+			display: flex;
+			justify-content: space-between;
+		}
+		.ship-header a{
+			transition: all 0.2s ease;
+		}
+		.ship-header a:hover{
+			color: black;
+			text-decoration: none;
+		}
     </style>
 	<link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
 </head>
@@ -265,7 +276,46 @@
 <body>
     <form id="checkoutForm" action="" method="post">
 	<div class="container-md">
-        <div class="row d-flex flex-row-reverse">
+        <div class="row d-flex flex-row">
+			
+			<div class="left-container col-md-6">
+					<p class="checkout-title"><a href="cart_view.php"><i class="back fa fa-chevron-left"></i></a> Checkout</p>
+					<div class="error-callout" id="error-callout" style="display:none;">
+						<span class="error" style="color: red; margin: 0; padding: 0;"></span>
+					</div>
+					<h6 class="checkout-subtitle">Personal Details</h6>
+					<p class="label">Name: <span class="content"><?php echo $user['firstname'].' '.$user['lastname']?></span></p>
+					<p class="label">Contact: <span class="content"><?php echo $user['contact_info']? $user['contact_info']:'no contact' ?></span></p>
+					<br>
+					<div class="ship-header">
+						<h6 class="checkout-subtitle">Shipping Information</h6>
+						<a href="user_address.php">Manage address</a>
+					</div>
+					<div id="address-view"></div>
+					<div id="no-address"></div>
+					<!-- <div class="left-container-child">
+						<label class="form-label">Region <span class="required">*</span></label>
+						<select name="region" class="form-control form-control-md" id="region"></select>
+						<input type="hidden" class="form-control form-control-md" name="region_text" id="region-text" required>
+						<label class="form-label">Province <span class="required">*</span></label>
+						<select name="province" class="form-control form-control-md" id="province"></select>
+						<input type="hidden" class="form-control form-control-md" name="province_text" id="province-text" required>
+						<label class="form-label">City / Municipality <span class="required">*</span></label>
+						<select name="city" class="form-control form-control-md" id="city"></select>
+						<input type="hidden" class="form-control form-control-md" name="city_text" id="city-text" required>
+						<label class="form-label">Barangay <span class="required">*</span></label>
+						<select name="barangay" class="form-control form-control-md" id="barangay"></select>
+						<input type="hidden" class="form-control form-control-md" name="barangay_text" id="barangay-text" required>
+						<label for="street-text" class="form-label">Street <span class="required">*</span></label>
+						<input type="text" class="form-control form-control-md" name="street_text" id="street-text" required>
+						<p class="pm-label">Payment Method <span class="required">*</span></p>
+						<div class="payment-method">
+							<p><input type="checkbox" name="COD" id="agree"> Cash On Delivery</p>
+							<p><input type="checkbox" name="GCash" id="agree" disabled> GCash</p>
+							<p><input type="checkbox" name="Maya" id="agree" disabled> Maya</p>
+						</div>
+					</div> -->
+			</div>
 			<div class="right-container col-md-6">
 			<p class="cart-title">Review your cart</p>
 			<div class="review">
@@ -325,8 +375,13 @@
 						</div>
 						<p class="agree"><input type="checkbox" name="agree" id="agree" required> I have read and agree to the Terms and Condition</p>
 						<?php
-						$show = $user['addressId'] ? "" : "hidden"; 
+						$stmt = $conn->prepare("SELECT * FROM cart INNER JOIN products ON product_id = products.id WHERE user_id = :userid AND selected=true");
+						$stmt->execute(['userid' => $_SESSION['user']]);
+						$show = $user['addressId'] && $stmt->rowCount() > 0 ? "" : "hidden";
 						echo '<button type="submit" class="place-order" id="place-order" '.$show.'>Place Order</button>';
+						if($show){
+							echo "<p>Please provide all the details</p>";
+						}
 						?>
 						<div class="success-callout" id="success-callout" style="display:none;">
 							<span class="message">Order placed</span>
@@ -335,42 +390,8 @@
 					</div>
 			</div>
 			</div>
-			<div class="left-container col-md-6">
-					<p class="checkout-title"><a href="cart_view.php"><i class="back fa fa-chevron-left"></i></a> Checkout</p>
-					<div class="error-callout" id="error-callout" style="display:none;">
-						<span class="error" style="color: red; margin: 0; padding: 0;"></span>
-					</div>
-					<h6 class="checkout-subtitle">Personal Details</h6>
-					<p class="label">Name: <span class="content"><?php echo $user['firstname'].' '.$user['lastname']?></span></p>
-					<p class="label">Contact: <span class="content"><?php echo $user['contact_info']? $user['contact_info']:'no contact' ?></span></p>
-					<br>
-					<h6 class="checkout-subtitle">Shipping Information</h6>
-					<div id="address-view"></div>
-					<div id="no-address"></div>
-					<!-- <div class="left-container-child">
-						<label class="form-label">Region <span class="required">*</span></label>
-						<select name="region" class="form-control form-control-md" id="region"></select>
-						<input type="hidden" class="form-control form-control-md" name="region_text" id="region-text" required>
-						<label class="form-label">Province <span class="required">*</span></label>
-						<select name="province" class="form-control form-control-md" id="province"></select>
-						<input type="hidden" class="form-control form-control-md" name="province_text" id="province-text" required>
-						<label class="form-label">City / Municipality <span class="required">*</span></label>
-						<select name="city" class="form-control form-control-md" id="city"></select>
-						<input type="hidden" class="form-control form-control-md" name="city_text" id="city-text" required>
-						<label class="form-label">Barangay <span class="required">*</span></label>
-						<select name="barangay" class="form-control form-control-md" id="barangay"></select>
-						<input type="hidden" class="form-control form-control-md" name="barangay_text" id="barangay-text" required>
-						<label for="street-text" class="form-label">Street <span class="required">*</span></label>
-						<input type="text" class="form-control form-control-md" name="street_text" id="street-text" required>
-						<p class="pm-label">Payment Method <span class="required">*</span></p>
-						<div class="payment-method">
-							<p><input type="checkbox" name="COD" id="agree"> Cash On Delivery</p>
-							<p><input type="checkbox" name="GCash" id="agree" disabled> GCash</p>
-							<p><input type="checkbox" name="Maya" id="agree" disabled> Maya</p>
-						</div>
-					</div> -->
-			</div>
         </div>
+		
     </div>	
 	</form>
 	<?php include 'includes/scripts.php'; ?>

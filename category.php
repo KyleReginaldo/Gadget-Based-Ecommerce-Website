@@ -100,7 +100,7 @@
 </style>
 <div class="wrapper">
 	<?php include 'includes/navbar.php'; ?>
-	  <div class="content-wrapper" style="margin-top: 4rem">
+	  <div class="content-wrapper" style="padding-top: 4rem">
 	    <div class="container">
 	      <section class="content">
 	        <div class="row">
@@ -152,7 +152,7 @@
 							}else{
 								echo "<div><p>There is no available products</p></div>";
 							}
-						}
+						} 
 						catch(PDOException $e){
 							echo "There is some problem in connection: " . $e->getMessage();
 						}
@@ -160,17 +160,14 @@
 		       		?>
 					<?php
 					?>
-	        	</div>
-	        	<!-- <div class="col-sm-1">
-	        		<?php include 'includes/sidebar.php'; ?>
-	        	</div> -->
+	</div>
 	        </div>
 	      </section>
 	    </div>
 	  </div>
-  
-  	<?php include 'includes/footer.php'; ?>
 </div>
+<?php include 'includes/footer.php'; ?>
+
 <script>
 	document.addEventListener('DOMContentLoaded', function() {
         const urlParams = new URLSearchParams(window.location.search);

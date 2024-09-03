@@ -162,6 +162,18 @@
 		width: 100%;
 		height: 60%;
 	}
+	.mailto{
+		font-size: 1.5rem;
+		border: 1px solid blue;
+		padding: 0.5rem 1rem;
+		color: blue;
+		border-radius: 8px;
+		transition: all 0.2s ease;
+	}
+	.mailto:hover{
+		border-radius: 0;
+
+	}
 </style>
 <div class="wrapper">
 
@@ -292,8 +304,9 @@
 					<h5>Contact us</h5>
 					<p>Reach out and we'll get in touch within 24 hours.</p>
 					<div class="contact-container">
-						<input type="email" placeholder="Enter your email">
-						<button type="submit">Submit</button>
+						<!-- <input type="email" placeholder="Enter your email"> -->
+						<!-- <button type="submit">Submit</button> -->
+						<a class="mailto" href="mailto:kyledennis@gmail.com">Send us an email</a>
 					</div>
 				</div>
 			</div>

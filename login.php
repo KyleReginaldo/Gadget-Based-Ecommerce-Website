@@ -107,7 +107,7 @@
                     <input type="password" class="form-control" name="password" placeholder="Enter your password" required>
                     <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                 </div>
-                <a href=""><small class="forgot-password">Forgotten your password?</small></a>
+                <a href="forgot_password.php"><small class="forgot-password">Forgotten your password?</small></a>
                 <button type="submit" class="button-auth btn btn-primary btn-block btn-flat" name="login"><i class="fa fa-sign-in"></i> Sign In</button>
             </form>
             <medium class="text-center">Don't have an account? <a href="signup.php">Sign Up</a></medium>

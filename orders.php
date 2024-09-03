@@ -147,7 +147,7 @@
 <div class="wrapper">
 <?php include 'includes/navbar.php'; ?>
 <?php include 'admin/includes/rate_modal.php';?>
-<div class="content-wrapper" style="margin-top: 4rem" >
+<div class="content-wrapper" style="padding-top: 4rem; height: 100%;" >
     <div class="container">
         <form action="" method="get">
             <div class="tab-row">
@@ -160,8 +160,9 @@
        <div class="order_details" id="order_details" data-id="<?php echo $_GET['status']?>"></div>
     </div>
 </div>
-<?php include 'includes/footer.php'?>
 </div>
+<?php include 'includes/footer.php'?>
+
 <?php include 'includes/scripts.php'; ?>
 <script>
 $(function(){

@@ -64,6 +64,9 @@
     .prod-body{
       height:300px;
     }
+    .content-wrapper{
+      background-color: #ecf0f5;
+    }
 
     .box:hover {
         box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);

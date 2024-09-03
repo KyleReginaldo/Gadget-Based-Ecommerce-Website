@@ -4,7 +4,7 @@
     $output = '';
     try{
         $inc = 3;	
-        $stmt = $conn->prepare("SELECT * FROM cart INNERT JOIN products ON product_id = products.id WHERE user_id = :userid AND selected=true");
+        $stmt = $conn->prepare("SELECT * FROM cart INNER JOIN products ON product_id = products.id WHERE user_id = :userid AND selected=true");
         $stmt->execute(['userid' => $_SESSION['user']]);
         foreach ($stmt as $row) {
             $_SESSION['productId'] = $row['id'];

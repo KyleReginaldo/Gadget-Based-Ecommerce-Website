@@ -11,7 +11,8 @@
 
   $conn = $pdo->open();
 ?>
-<?php include 'includes/header.php'; ?>
+  <?php include 'includes/header.php'; ?>
+
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
 
@@ -19,7 +20,7 @@
   <?php include 'includes/menubar.php'; ?>
 
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper" style="margin-top: 4rem">
+  <div class="content-wrapper" style="padding-top: 4rem; height: 100%;">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
