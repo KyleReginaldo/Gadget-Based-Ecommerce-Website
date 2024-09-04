@@ -144,6 +144,8 @@
         }
     });
 </script>
+<?php include 'cancel_modal.php';?>
+
 <div class="wrapper">
 <?php include 'includes/navbar.php'; ?>
 <?php include 'admin/includes/rate_modal.php';?>

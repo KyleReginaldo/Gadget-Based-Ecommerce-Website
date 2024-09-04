@@ -19,7 +19,7 @@
 
   var Selector = {
     wrapper       : '.wrapper',
-    contentWrapper: '.content-wrapper" style="margin-top: 4rem"',
+    contentWrapper: '.content-wrapper',
     layoutBoxed   : '.layout-boxed',
     mainFooter    : '.main-footer',
     mainHeader    : '.main-header',

@@ -7,7 +7,7 @@
   <?php include 'includes/menubar.php'; ?>
 
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper" style="padding-top: 1rem">
+  <div class="content-wrapper"  style="background-color: white; height: 100%;">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
@@ -59,7 +59,7 @@
     </section>
      
   </div>
-  	<?php include 'includes/footer.php'; ?>
+  	<!-- <?php include 'includes/footer.php'; ?> -->
     <?php include '../includes/profile_modal.php'; ?>
 
 </div>

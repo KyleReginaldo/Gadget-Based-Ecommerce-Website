@@ -1,6 +1,6 @@
 <?php 
   include 'includes/session.php';
-  include 'includes/format.php'; 
+  include 'includes/format.php';
 ?>
 <?php 
   $today = date('Y-m-d');
@@ -20,7 +20,7 @@
   <?php include 'includes/menubar.php'; ?>
 
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper" style="padding-top: 4rem; height: 100%;">
+  <div class="content-wrapper" style=" background-color: white; height: 100%;">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
@@ -183,7 +183,7 @@
       </section>
       <!-- right col -->
     </div>
-  	<?php include 'includes/footer.php'; ?>
+  	<!-- <?php include 'includes/footer.php'; ?> -->
 
 </div>
 <!-- ./wrapper -->

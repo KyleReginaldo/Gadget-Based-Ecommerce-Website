@@ -82,6 +82,7 @@ $(function(){
 				$('#success-callout').show();
 				$('#success-callout').removeClass('callout-danger').addClass('callout-success');
 				getOrders();
+				header('location: cart_view.php');
   			}
   		}
   	});

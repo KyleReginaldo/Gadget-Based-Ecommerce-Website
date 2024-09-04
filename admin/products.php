@@ -9,13 +9,13 @@
 ?>
 <?php include 'includes/header.php'; ?>
 <body class="hold-transition skin-blue sidebar-mini">
-<div class="wrapper">
+<div class="wrapper" style="background-color: white">
 
   <?php include 'includes/navbar.php'; ?>
   <?php include 'includes/menubar.php'; ?>
 
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper" style="margin-top: 4rem">
+  <div class="content-wrapper"  style="background-color: white; height: 100%;">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
@@ -138,7 +138,6 @@
     </section>
      
   </div>
-  	<?php include 'includes/footer.php'; ?>
     <?php include 'includes/products_modal.php'; ?>
     <?php include 'includes/products_modal2.php'; ?>
 

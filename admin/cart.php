@@ -23,7 +23,7 @@
   <?php include 'includes/menubar.php'; ?>
 
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper" style="margin-top: 4rem">
+  <div class="content-wrapper"  style="padding-left: 12%; background-color: white; height: 94%;">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
@@ -106,9 +106,7 @@
         </div>
       </div>
     </section>
-     
   </div>
-  	<?php include 'includes/footer.php'; ?>
     <?php include 'includes/cart_modal.php'; ?>
 
 </div>

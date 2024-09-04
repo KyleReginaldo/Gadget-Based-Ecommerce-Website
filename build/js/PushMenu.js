@@ -21,7 +21,7 @@
     collapsed     : '.sidebar-collapse',
     open          : '.sidebar-open',
     mainSidebar   : '.main-sidebar',
-    contentWrapper: '.content-wrapper" style="margin-top: 4rem"',
+    contentWrapper: '.content-wrapper',
     searchInput   : '.sidebar-form .form-control',
     button        : '[data-toggle="push-menu"]',
     mini          : '.sidebar-mini',

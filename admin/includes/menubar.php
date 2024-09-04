@@ -18,7 +18,7 @@
       <li class="header">MANAGE</li>
       <li><a href="users.php"><i class="fa fa-users"></i> <span>Users</span></a></li>
       <li class="treeview">
-        <a href="#">
+        <a href="">
           <i class="fa fa-barcode"></i>
           <span>Products</span>
           <span class="pull-right-container">

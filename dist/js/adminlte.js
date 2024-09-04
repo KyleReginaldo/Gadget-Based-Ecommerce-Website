@@ -326,7 +326,7 @@ throw new Error('AdminLTE requires jQuery')
     open   : '.control-sidebar-open',
     bg     : '.control-sidebar-bg',
     wrapper: '.wrapper',
-    content: '.content-wrapper" style="margin-top: 4rem"',
+    content: '.content-wrapper',
     boxed  : '.layout-boxed'
   }
 
@@ -532,7 +532,7 @@ throw new Error('AdminLTE requires jQuery')
 
   var Selector = {
     wrapper       : '.wrapper',
-    contentWrapper: '.content-wrapper" style="margin-top: 4rem"',
+    contentWrapper: '.content-wrapper',
     layoutBoxed   : '.layout-boxed',
     mainFooter    : '.main-footer',
     mainHeader    : '.main-header',
@@ -715,7 +715,7 @@ throw new Error('AdminLTE requires jQuery')
     collapsed     : '.sidebar-collapse',
     open          : '.sidebar-open',
     mainSidebar   : '.main-sidebar',
-    contentWrapper: '.content-wrapper" style="margin-top: 4rem"',
+    contentWrapper: '.content-wrapper',
     searchInput   : '.sidebar-form .form-control',
     button        : '[data-toggle="push-menu"]',
     mini          : '.sidebar-mini',

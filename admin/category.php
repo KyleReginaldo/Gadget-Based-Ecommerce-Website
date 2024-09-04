@@ -7,7 +7,7 @@
   <?php include 'includes/menubar.php'; ?>
 
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper" style="margin-top: 4rem">
+  <div class="content-wrapper" style="background-color: white; height: 94%;">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
@@ -90,7 +90,6 @@
     </section>
      
   </div>
-  	<?php include 'includes/footer.php'; ?>
     <?php include 'includes/category_modal.php'; ?>
 
 </div>

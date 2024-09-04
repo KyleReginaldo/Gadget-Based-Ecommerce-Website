@@ -211,6 +211,7 @@
 	fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
 </script>
+
 <div class="wrapper">
 
 	<?php include 'includes/navbar.php'; ?>
@@ -225,6 +226,7 @@
 	        		<div class="callout" id="callout" style="display:none">
 	        			<button type="button" class="close"><span aria-hidden="true">&times;</span></button>
 	        			<span class="message"></span>
+						<a href="cart_view.php">Go to cart</a>
 	        		</div>
 		            <div class="row">
 		            	<div class="image-container col-sm-5">
@@ -265,8 +267,9 @@
 							        </div>
 									<div class="buttons">
 										<button type="submit" class="add-cart btn btn-primary btn-md">Add to Cart</button>
-										<a href="cart_view.php" class="checkout btn btn-md" id="checkout">Checkout</a>
+										<!-- <a href="#offcanvasExample" class="checkout btn btn-md" id="checkout" data-bs-toggle="offcanvas">Checkout</a> -->
 									</div>
+									
 									
 			            		</div>
 								<p><?php echo $product['description']; ?></p>

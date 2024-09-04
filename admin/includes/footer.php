@@ -1,4 +1,4 @@
-<footer class="main-footer" style="background-color: #001f3f; color: #fff; padding: 20px 0; text-align: center;">
+<footer class="main-footer" style="background-color: #001f3f; color: #fff; padding: 20px 0; text-align: center; width: 100%;">
     <div class="pull-right hidden-xs">
       <b>All rights reserved</b>
     </div>
