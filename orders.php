@@ -78,20 +78,20 @@
     border: 1px solid black;
 }
 .quantity{
-    font-size: 1.5rem;
-    color: black;
+font-size: 1.5rem;
+color: black;
 }
 .trailing{
-    display: flex;
-    flex-direction: column;
-    align-items: end;
+display: flex;
+flex-direction: column;
+align-items: end;
 }
 .trailing p{
-    margin-bottom: 1rem;
-    font-size: 16px;
+margin-bottom: 1rem;
+font-size: 16px;
 }
 .cat-choice{
-    transition: font-weight 0.2s ease-in-out, background-color 0.2s ease-in-out, color 0.2s ease-in-out, padding 0.2s ease-in-out, border-radius 0.2s ease-in-out;
+transition: font-weight 0.2s ease-in-out, background-color 0.2s ease-in-out, color 0.2s ease-in-out, padding 0.2s ease-in-out, border-radius 0.2s ease-in-out;
 }
 .cancelled{
     border: 1px solid #E78895;
